@@ -1,7 +1,10 @@
+
 import prisma from '@/lib/prisma';
 import styles from './page.module.css';
 import Link from 'next/link';
 import DonorsList from './DonorsList';
+
+export const dynamic = 'force-dynamic';
 
 export default async function DonorsPage() {
   const donors = await prisma.donor.findMany({
