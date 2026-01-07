@@ -2,6 +2,8 @@ import prisma from '@/lib/prisma';
 import Link from 'next/link';
 import styles from './page.module.css';
 
+export const dynamic = 'force-dynamic';
+
 interface Params {
   id: string;
 }
