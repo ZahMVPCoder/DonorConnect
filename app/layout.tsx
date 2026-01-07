@@ -1,8 +1,6 @@
 import './globals.css';
 import Navigation from '@/components/Navigation';
 
-export const dynamic = 'force-dynamic';
-
 export const metadata = {
   title: 'Donor CRM',
   description: 'Manage your donor relationships and campaigns',
