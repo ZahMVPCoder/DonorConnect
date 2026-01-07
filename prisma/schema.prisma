@@ -1,0 +1,81 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  username  String   @unique
+  password  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("users")
+}
+
+model Donor {
+  id        String   @id @default(cuid())
+  name      String
+  email     String   @unique
+  status    String   @default("Active") // Active, Lapsed, Prospect
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  donations Donation[]
+  tasks     Task[]
+
+  @@map("donors")
+}
+
+model Donation {
+  id         String   @id @default(cuid())
+  amount     Float
+  date       DateTime @default(now())
+  donorId    String
+  campaignId String?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  donor    Donor    @relation(fields: [donorId], references: [id])
+  campaign Campaign? @relation(fields: [campaignId], references: [id])
+
+  @@map("donations")
+}
+
+model Campaign {
+  id         String   @id @default(cuid())
+  name       String
+  status     String   @default("Active") // Active, Completed, Paused
+  goal       Float
+  raised     Float    @default(0)
+  startDate  DateTime
+  endDate    DateTime
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  donations Donation[]
+
+  @@map("campaigns")
+}
+
+model Task {
+  id          String   @id @default(cuid())
+  title       String
+  description String?
+  status      String   @default("Pending") // Pending, Completed
+  priority    String   @default("Medium") // Low, Medium, High
+  type        String   @default("Follow-up") // Thank You, Follow-up, Administrative
+  dueDate     DateTime
+  donorId     String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  donor Donor? @relation(fields: [donorId], references: [id])
+
+  @@map("tasks")
+}

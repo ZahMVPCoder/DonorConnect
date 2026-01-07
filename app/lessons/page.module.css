@@ -1,0 +1,316 @@
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.header {
+  text-align: center;
+  margin: 40px 0 30px 0;
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #333;
+  margin: 0 0 10px 0;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  color: #888;
+  margin: 0;
+}
+
+.overview {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 30px;
+  border-radius: 12px;
+  margin-bottom: 50px;
+}
+
+.overview h2 {
+  margin: 0 0 15px 0;
+  font-size: 1.5rem;
+}
+
+.overview p {
+  margin: 0;
+  line-height: 1.6;
+  opacity: 0.95;
+}
+
+.lessonsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 25px;
+  margin-bottom: 60px;
+}
+
+.lessonCard {
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 25px;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.lessonCard:hover:not(.comingSoon) {
+  border-color: #667eea;
+  box-shadow: 0 10px 30px rgba(102, 126, 234, 0.15);
+  transform: translateY(-5px);
+}
+
+.lessonCard.comingSoon {
+  opacity: 0.7;
+  background: #f9f9f9;
+}
+
+.lessonHeader {
+  margin-bottom: 15px;
+}
+
+.lessonTitle {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #333;
+  margin: 0 0 10px 0;
+}
+
+.badges {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.difficulty,
+.duration {
+  font-size: 0.85rem;
+  padding: 6px 12px;
+  border-radius: 20px;
+  background: #f0f4ff;
+  color: #667eea;
+  font-weight: 600;
+}
+
+.duration {
+  background: #fff3e0;
+  color: #e65100;
+}
+
+.description {
+  color: #666;
+  line-height: 1.6;
+  margin: 0 0 15px 0;
+  flex-grow: 1;
+}
+
+.objectives {
+  background: #f9f9f9;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.objectives h4 {
+  margin: 0 0 10px 0;
+  font-size: 0.9rem;
+  color: #333;
+  font-weight: 600;
+}
+
+.objectives ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.objectives li {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 6px;
+  line-height: 1.5;
+}
+
+.objectives li:last-child {
+  margin-bottom: 0;
+}
+
+.startButton {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  text-decoration: none;
+  text-align: center;
+  transition: all 0.3s;
+  display: inline-block;
+}
+
+.startButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+}
+
+.comingSoonButton {
+  background: #e0e0e0;
+  color: #999;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: not-allowed;
+}
+
+.pathSection {
+  margin-bottom: 60px;
+}
+
+.pathSection h2 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #333;
+  margin: 0 0 30px 0;
+  text-align: center;
+}
+
+.pathVisualization {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.level {
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.levelTitle {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #667eea;
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #f0f4ff;
+}
+
+.lessons {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+}
+
+.pathLesson {
+  background: #f9f9f9;
+  padding: 12px 15px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  color: #666;
+  border-left: 4px solid #ddd;
+}
+
+.pathLesson.complete {
+  background: #e8f5e9;
+  color: #2e7d32;
+  border-left-color: #4caf50;
+  font-weight: 600;
+}
+
+.arrow {
+  text-align: center;
+  font-size: 2rem;
+  color: #667eea;
+  margin: 10px 0;
+}
+
+.techStack {
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  padding: 40px;
+  border-radius: 12px;
+  margin-bottom: 40px;
+}
+
+.techStack h2 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #333;
+  margin: 0 0 30px 0;
+  text-align: center;
+}
+
+.techGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 20px;
+}
+
+.techItem {
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.techIcon {
+  display: block;
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+
+.techName {
+  display: block;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 8px;
+  font-size: 1rem;
+}
+
+.techDesc {
+  display: block;
+  color: #999;
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+@media (max-width: 768px) {
+  .title {
+    font-size: 2rem;
+  }
+
+  .lessonsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .pathVisualization {
+    gap: 15px;
+  }
+
+  .lessons {
+    grid-template-columns: 1fr;
+  }
+
+  .techGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .techGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .overview {
+    padding: 20px;
+  }
+}
