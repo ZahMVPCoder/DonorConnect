@@ -44,7 +44,9 @@ export async function POST(req: NextRequest) {
         message: 'Logged in successfully',
         user: {
           id: user.id,
-          email: user.email,          username: user.username,        },
+          email: user.email,
+          username: user.username,
+        },
       },
       { status: 200 }
     );
