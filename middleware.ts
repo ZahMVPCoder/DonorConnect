@@ -1,27 +1,32 @@
 import { NextRequest, NextResponse } from 'next/server';
 
 export function middleware(request: NextRequest) {
-  const pathname = request.nextUrl.pathname;
-  
-  // Get the user from localStorage (client-side only, so we check from cookies or headers)
-  // Since middleware runs on the server, we'll check for auth token in cookies
-  const isAuthenticated = request.cookies.get('auth-user')?.value;
+  try {
+    const pathname = request.nextUrl.pathname;
+    
+    // Get the user from cookies
+    const isAuthenticated = request.cookies.get('auth-user')?.value;
 
-  // Routes that don't require authentication
-  const publicRoutes = ['/welcome', '/auth/signin', '/auth/signup'];
-  const isPublicRoute = publicRoutes.some(route => pathname.startsWith(route));
+    // Routes that don't require authentication
+    const publicRoutes = ['/welcome', '/auth/signin', '/auth/signup'];
+    const isPublicRoute = publicRoutes.some(route => pathname.startsWith(route));
 
-  // If trying to access protected route without auth, redirect to welcome
-  if (!isAuthenticated && !isPublicRoute) {
-    return NextResponse.redirect(new URL('/welcome', request.url));
+    // If trying to access protected route without auth, redirect to welcome
+    if (!isAuthenticated && !isPublicRoute) {
+      return NextResponse.redirect(new URL('/welcome', request.url));
+    }
+
+    // If authenticated and trying to access welcome/auth pages, redirect to home
+    if (isAuthenticated && (pathname === '/welcome' || pathname.startsWith('/auth'))) {
+      return NextResponse.redirect(new URL('/', request.url));
+    }
+
+    return NextResponse.next();
+  } catch (error) {
+    console.error('Middleware error:', error);
+    // On error, allow the request to proceed
+    return NextResponse.next();
   }
-
-  // If authenticated and trying to access welcome/auth pages, redirect to home
-  if (isAuthenticated && (pathname === '/welcome' || pathname.startsWith('/auth'))) {
-    return NextResponse.redirect(new URL('/', request.url));
-  }
-
-  return NextResponse.next();
 }
 
 export const config = {
