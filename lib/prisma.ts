@@ -4,11 +4,8 @@ const prismaClientSingleton = () => {
   return new PrismaClient({
     log: process.env.NODE_ENV === 'development' ? ['query'] : [],
   });
-  var prisma: undefined | ReturnType<typeof prismaClientSingleton>;
-}
+};
 
-const prisma = globalThis.prisma ?? prismaClientSingleton();
-
-export default prisma;
-
+declare global {
+  var prisma: PrismaClient | undefined;
 if (process.env.NODE_ENV !== 'production') globalThis.prisma = prisma;
