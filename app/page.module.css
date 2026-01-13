@@ -1,20 +1,29 @@
 .container {
   max-width: 1400px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 40px 20px;
+}
+
+.pageHeader {
+  margin-bottom: 40px;
 }
 
 .title {
-  font-size: 2rem;
-  font-weight: 700;
-  color: #333;
-  margin: 20px 0 5px 0;
+  font-size: 2.5rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #333 0%, #667eea 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin: 0 0 8px 0;
+  letter-spacing: -0.5px;
 }
 
 .subtitle {
-  color: #888;
-  margin: 0 0 30px 0;
-  font-size: 0.95rem;
+  color: #999;
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 400;
 }
 
 .metricsGrid {
@@ -26,37 +35,49 @@
 
 .metricCard {
   background: white;
-  padding: 25px;
-  border-radius: 8px;
-  border: 1px solid #e0e0e0;
+  padding: 28px;
+  border-radius: 12px;
+  border: 1px solid rgba(102, 126, 234, 0.1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease;
+}
+
+.metricCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 30px rgba(102, 126, 234, 0.15);
 }
 
 .metricCard h3 {
-  color: #999;
-  font-size: 0.9rem;
-  font-weight: 500;
-  margin: 0 0 12px 0;
+  color: #667eea;
+  font-size: 0.8rem;
+  font-weight: 700;
+  margin: 0 0 14px 0;
   text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .metricValue {
-  font-size: 2rem;
-  font-weight: 700;
+  font-size: 2.2rem;
+  font-weight: 800;
   color: #333;
-  margin: 0;
+  margin: 0 0 8px 0;
 }
 
 .metricSubtext {
   color: #999;
   font-size: 0.85rem;
-  margin: 5px 0 0 0;
+  margin: 0;
+  font-weight: 500;
 }
 
 .trend {
   display: inline-block;
   color: #4caf50;
   font-size: 0.85rem;
-  margin-top: 8px;
+  margin-top: 10px;
+  font-weight: 600;
 }
 
 .twoColumnLayout {
@@ -68,66 +89,87 @@
 
 .section {
   background: white;
-  border-radius: 8px;
-  border: 1px solid #e0e0e0;
-  padding: 25px;
+  border-radius: 12px;
+  border: 1px solid rgba(102, 126, 234, 0.1);
+  padding: 28px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
 }
 
 .sectionHeader {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(102, 126, 234, 0.1);
 }
 
 .sectionHeader h2 {
-  font-size: 1.2rem;
-  font-weight: 600;
+  font-size: 1.3rem;
+  font-weight: 700;
   color: #333;
   margin: 0;
 }
 
 .button {
-  background: #1a1a2e;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
-  padding: 10px 20px;
-  border-radius: 6px;
+  padding: 11px 24px;
+  border-radius: 10px;
   font-size: 0.9rem;
-  font-weight: 500;
-  transition: background 0.2s;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
 }
 
 .button:hover {
-  background: #0f0f1e;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 25px rgba(102, 126, 234, 0.4);
 }
 
 .viewAllLink {
-  color: #1a1a2e;
+  color: #667eea;
   font-size: 0.9rem;
-  font-weight: 500;
-  text-decoration: underline;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  padding: 6px 12px;
+  border-radius: 6px;
+}
+
+.viewAllLink:hover {
+  background: rgba(102, 126, 234, 0.1);
+  transform: translateX(2px);
 }
 
 .donationsList {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 16px;
 }
 
 .donationItem {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px;
-  border: 1px solid #f0f0f0;
-  border-radius: 6px;
-  background: #fafafa;
+  padding: 16px;
+  border: 1px solid rgba(102, 126, 234, 0.1);
+  border-radius: 10px;
+  background: linear-gradient(135deg, #f5f7ff 0%, #f0f4ff 100%);
+  transition: all 0.3s ease;
+}
+
+.donationItem:hover {
+  border-color: rgba(102, 126, 234, 0.3);
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.15);
 }
 
 .donorName {
-  font-weight: 600;
+  font-weight: 700;
   color: #333;
-  margin: 0 0 5px 0;
+  margin: 0 0 4px 0;
   font-size: 0.95rem;
 }
 
@@ -135,75 +177,88 @@
   color: #999;
   font-size: 0.85rem;
   margin: 0;
+  font-weight: 500;
 }
 
-.donationAmount {
+.donationRight {
   text-align: right;
 }
 
-.donationAmount span:first-child {
-  display: block;
-  font-weight: 600;
+.donationAmount {
+  font-weight: 700;
   color: #333;
-  font-size: 1rem;
+  font-size: 1.05rem;
+  margin: 0 0 4px 0;
 }
 
 .donationDate {
   color: #999;
   font-size: 0.85rem;
-  display: block;
-  margin-top: 3px;
+  margin: 0;
 }
 
 .tasksList {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 16px;
 }
 
 .taskItem {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px;
-  border: 1px solid #f0f0f0;
-  border-radius: 6px;
-  background: #fafafa;
+  padding: 16px;
+  border: 1px solid rgba(102, 126, 234, 0.1);
+  border-radius: 10px;
+  background: linear-gradient(135deg, #f5f7ff 0%, #f0f4ff 100%);
+  transition: all 0.3s ease;
+}
+
+.taskItem:hover {
+  border-color: rgba(102, 126, 234, 0.3);
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.15);
 }
 
 .taskTitle {
-  font-weight: 600;
+  font-weight: 700;
   color: #333;
-  margin: 0 0 5px 0;
+  margin: 0 0 4px 0;
   font-size: 0.95rem;
 }
 
 .taskDate {
   color: #999;
   font-size: 0.85rem;
-}
-
-.priority {
-  display: inline-block;
-  padding: 4px 12px;
-  border-radius: 20px;
-  font-size: 0.8rem;
+  margin: 0;
   font-weight: 500;
 }
 
-.priority.high {
-  background: #ffebee;
-  color: #c62828;
+.priorityBadge {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
 }
 
-.priority.medium {
-  background: #fff3e0;
-  color: #e65100;
+.priorityBadge.high {
+  background: linear-gradient(135deg, rgba(244, 67, 54, 0.1) 0%, rgba(244, 67, 54, 0.05) 100%);
+  color: #d32f2f;
+  border: 1px solid rgba(211, 47, 47, 0.2);
 }
 
-.priority.low {
-  background: #f3e5f5;
+.priorityBadge.medium {
+  background: linear-gradient(135deg, rgba(255, 152, 0, 0.1) 0%, rgba(255, 152, 0, 0.05) 100%);
+  color: #f57c00;
+  border: 1px solid rgba(245, 124, 0, 0.2);
+}
+
+.priorityBadge.low {
+  background: linear-gradient(135deg, rgba(123, 31, 162, 0.1) 0%, rgba(123, 31, 162, 0.05) 100%);
   color: #7b1fa2;
+  border: 1px solid rgba(123, 31, 162, 0.2);
 }
 
 @media (max-width: 1200px) {

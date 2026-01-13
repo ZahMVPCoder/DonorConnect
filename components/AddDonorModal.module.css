@@ -109,24 +109,25 @@
 
 .submitButton,
 .cancelButton {
-  padding: 12px 25px;
+  padding: 13px 28px;
   border: none;
-  border-radius: 8px;
+  border-radius: 10px;
   font-weight: 600;
   font-size: 0.95rem;
   cursor: pointer;
-  transition: all 0.3s;
+  transition: all 0.3s ease;
   flex: 1;
 }
 
 .submitButton {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
 }
 
 .submitButton:hover:not(:disabled) {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
 }
 
 .submitButton:disabled {
@@ -135,12 +136,14 @@
 }
 
 .cancelButton {
-  background: #f0f0f0;
-  color: #333;
+  background: #f0f4ff;
+  color: #667eea;
+  border: 2px solid rgba(102, 126, 234, 0.2);
 }
 
 .cancelButton:hover {
-  background: #e0e0e0;
+  background: #e8ecff;
+  border-color: rgba(102, 126, 234, 0.4);
 }
 
 @media (max-width: 480px) {

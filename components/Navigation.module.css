@@ -1,10 +1,11 @@
 .nav {
-  background-color: white;
-  border-bottom: 1px solid #e0e0e0;
+  background: linear-gradient(90deg, #ffffff 0%, #f8f9ff 100%);
+  border-bottom: 1px solid rgba(102, 126, 234, 0.1);
   padding: 0;
   position: sticky;
   top: 0;
   z-index: 100;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
 }
 
 .container {
@@ -21,9 +22,13 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: #333;
+  font-size: 1.5rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -0.5px;
 }
 
 .icon {
@@ -40,32 +45,34 @@
 }
 
 .links a {
-  color: #666;
+  color: #555;
   font-size: 0.95rem;
-  transition: color 0.2s;
+  font-weight: 500;
   text-decoration: none;
   display: inline-block;
   padding: 8px 0;
   border-bottom: 2px solid transparent;
-  transition: all 0.2s;
+  transition: all 0.3s ease;
 }
 
 .links a:hover {
-  color: #333;
+  color: #667eea;
   border-bottom-color: #667eea;
 }
 
 .signUpLink {
-  background: #1a1a2e !important;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
   color: white !important;
-  padding: 8px 16px;
-  border-radius: 6px;
+  padding: 10px 24px;
+  border-radius: 8px;
   font-weight: 600;
   font-size: 0.9rem !important;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
 }
 
 .signUpLink:hover {
-  background: #0f0f1e !important;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
   color: white !important;
 }
 

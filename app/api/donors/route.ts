@@ -84,10 +84,11 @@ export async function POST(request: NextRequest) {
 
     // If last gift amount is provided, create a donation record
     if (lastGiftAmount && lastGiftAmount > 0) {
+      const campaign = await prisma.campaign.findFirst({ select: { id: true } });
       await prisma.donation.create({
         data: {
           donorId: donor.id,
-          campaignId: (await prisma.campaign.findFirst({ select: { id: true } }))?.id || '',
+          campaignId: campaign?.id,
           amount: lastGiftAmount,
           date: new Date(),
         },
