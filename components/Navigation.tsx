@@ -6,12 +6,28 @@ import styles from './Navigation.module.css';
 
 export default function Navigation() {
   const [user, setUser] = useState<any>(null);
+  const [userRole, setUserRole] = useState<string>('staff');
 
   useEffect(() => {
     // Get user from localStorage
     const storedUser = localStorage.getItem('user');
     if (storedUser) {
       setUser(JSON.parse(storedUser));
+    }
+    // Get user role from a new endpoint
+    const fetchUserRole = async () => {
+      try {
+        const response = await fetch('/api/user/profile');
+        if (response.ok) {
+          const data = await response.json();
+          setUserRole(data.role || 'staff');
+        }
+      } catch (err) {
+        console.error('Failed to fetch user role');
+      }
+    };
+    if (storedUser) {
+      fetchUserRole();
     }
   }, []);
 
@@ -45,8 +61,13 @@ export default function Navigation() {
               <li>
                 <Link href="/tasks">Tasks</Link>
               </li>
+              {userRole === 'admin' && (
+                <li>
+                  <Link href="/admin" style={{ color: '#667eea', fontWeight: '600' }}>⚙️ Admin</Link>
+                </li>
+              )}
               <li className={styles.userSection}>
-                <span className={styles.userDisplay}>You/{user.username}!</span>
+                <span className={styles.userDisplay}>You/{user.username}! ({userRole})</span>
                 <button onClick={handleLogout} className={styles.logoutButton}>
                   Sign Out
                 </button>
