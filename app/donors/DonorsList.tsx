@@ -24,6 +24,8 @@ export default function DonorsList({ initialDonors }: DonorsListProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [filterStatus, setFilterStatus] = useState('All Status');
+  const [showSuccessToast, setShowSuccessToast] = useState(false);
+  const [successMessage, setSuccessMessage] = useState('');
 
   const getStatusColor = (status: string) => {
     const statusMap: { [key: string]: string } = {
@@ -59,6 +61,11 @@ export default function DonorsList({ initialDonors }: DonorsListProps) {
           donations: [],
         }));
         setDonors(donorsWithTotals);
+        
+        // Show success toast
+        setSuccessMessage(`✓ Donor has been successfully saved to the database!`);
+        setShowSuccessToast(true);
+        setTimeout(() => setShowSuccessToast(false), 4000);
       }
     } catch (error) {
       console.error('Failed to refresh donors:', error);
@@ -67,6 +74,12 @@ export default function DonorsList({ initialDonors }: DonorsListProps) {
 
   return (
     <div className={styles.container}>
+      {showSuccessToast && (
+        <div className={styles.successToast}>
+          {successMessage}
+        </div>
+      )}
+      
       <div className={styles.header}>
         <div>
           <h1 className={styles.title}>Donors</h1>

@@ -18,6 +18,7 @@ export default function AddDonorModal({ isOpen, onClose, onSuccess }: AddDonorMo
     totalGiving: '',
   });
   const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
   const [loading, setLoading] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -31,6 +32,7 @@ export default function AddDonorModal({ isOpen, onClose, onSuccess }: AddDonorMo
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError('');
+    setSuccess('');
     setLoading(true);
 
     try {
@@ -70,9 +72,15 @@ export default function AddDonorModal({ isOpen, onClose, onSuccess }: AddDonorMo
         return;
       }
 
+      // Show success message
+      setSuccess(`✓ Donor "${formData.name}" has been successfully added to your database!`);
       setFormData({ name: '', email: '', status: 'Active', lastGiftAmount: '', totalGiving: '' });
-      onSuccess();
-      onClose();
+      
+      // Wait 2 seconds, then close and refresh
+      setTimeout(() => {
+        onSuccess();
+        onClose();
+      }, 2000);
     } catch (err) {
       setError('An error occurred. Please try again.');
       console.error(err);
@@ -94,6 +102,8 @@ export default function AddDonorModal({ isOpen, onClose, onSuccess }: AddDonorMo
         </div>
 
         {error && <div className={styles.error}>{error}</div>}
+
+        {success && <div className={styles.success}>{success}</div>}
 
         <form onSubmit={handleSubmit} className={styles.form}>
           <div className={styles.formGroup}>
