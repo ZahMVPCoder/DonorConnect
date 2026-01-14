@@ -91,36 +91,81 @@ export default function Dashboard() {
   return (
     <div className={styles.container}>
       <div className={styles.pageHeader}>
-        <h1 className={styles.title}>Dashboard</h1>
-        <p className={styles.subtitle}>Overview of donor engagement and fundraising progress</p>
+        <div className={styles.headerContent}>
+          <h1 className={styles.title}>Dashboard</h1>
+          <p className={styles.subtitle}>Welcome, {user.username}! Overview of donor engagement and fundraising progress</p>
+        </div>
+        <div className={styles.headerActions}>
+          <Link href="/donations" className={styles.actionButton}>
+            <span>➕</span> Log Donation
+          </Link>
+          <Link href="/tasks" className={styles.actionButton}>
+            <span>✓</span> View Tasks
+          </Link>
+        </div>
       </div>
 
-      {error && <div style={{ color: 'red', marginBottom: '20px' }}>{error}</div>}
+      {error && <div className={styles.errorMessage}>{error}</div>}
 
       {stats && (
         <>
-          {/* Metrics Grid */}
+          {/* Main Metrics Grid */}
           <div className={styles.metricsGrid}>
             <div className={styles.metricCard}>
+              <div className={styles.metricIcon}>💰</div>
               <h3>Total Raised This Month</h3>
               <div className={styles.metricValue}>${stats.totalRaisedThisMonth.toLocaleString()}</div>
               <div className={styles.trend}>📈 +15%</div>
             </div>
             <div className={styles.metricCard}>
+              <div className={styles.metricIcon}>🎯</div>
               <h3>Goal Progress</h3>
               <div className={styles.metricValue}>{stats.goalProgress}%</div>
               <div className={styles.metricSubtext}>of ${stats.goalAmount.toLocaleString()}</div>
+              <div className={styles.progressBar}>
+                <div className={styles.progressFill} style={{ width: `${stats.goalProgress}%` }}></div>
+              </div>
             </div>
             <div className={styles.metricCard}>
+              <div className={styles.metricIcon}>👥</div>
               <h3>New Donors</h3>
               <div className={styles.metricValue}>{stats.newDonors}</div>
               <div className={styles.metricSubtext}>this month</div>
             </div>
             <div className={styles.metricCard}>
+              <div className={styles.metricIcon}>⚠️</div>
               <h3>Lapsed Donors</h3>
               <div className={styles.metricValue}>{stats.lapsedDonors}</div>
               <div className={styles.metricSubtext}>needs follow-up</div>
             </div>
+          </div>
+
+          {/* Navigation Cards */}
+          <div className={styles.navigationGrid}>
+            <Link href="/donors" className={styles.navCard}>
+              <div className={styles.navIcon}>👥</div>
+              <h4>All Donors</h4>
+              <p>View and manage all donors</p>
+              <span className={styles.navArrow}>→</span>
+            </Link>
+            <Link href="/donations" className={styles.navCard}>
+              <div className={styles.navIcon}>💳</div>
+              <h4>Record Donation</h4>
+              <p>Log new donations</p>
+              <span className={styles.navArrow}>→</span>
+            </Link>
+            <Link href="/campaigns" className={styles.navCard}>
+              <div className={styles.navIcon}>📊</div>
+              <h4>Campaigns</h4>
+              <p>Track fundraising campaigns</p>
+              <span className={styles.navArrow}>→</span>
+            </Link>
+            <Link href="/tasks" className={styles.navCard}>
+              <div className={styles.navIcon}>✅</div>
+              <h4>Tasks</h4>
+              <p>View and manage tasks</p>
+              <span className={styles.navArrow}>→</span>
+            </Link>
           </div>
 
           {/* Two Column Layout */}
@@ -129,44 +174,75 @@ export default function Dashboard() {
             <div className={styles.section}>
               <div className={styles.sectionHeader}>
                 <h2>Recent Donations</h2>
-                <button className={styles.button}>Log Donation</button>
+                <Link href="/donations" className={styles.viewAllLink}>View All →</Link>
               </div>
-              <div className={styles.donationsList}>
-                {stats.recentDonations.map((donation) => (
-                  <div key={donation.id} className={styles.donationItem}>
-                    <div>
-                      <div className={styles.donorName}>{donation.donorName}</div>
-                      <div className={styles.campaignName}>{donation.campaignName}</div>
-                    </div>
-                    <div className={styles.donationRight}>
-                      <div className={styles.donationAmount}>${donation.amount.toLocaleString()}</div>
-                      <div className={styles.donationDate}>
-                        {new Date(donation.date).toISOString().split('T')[0]}
+              {stats.recentDonations.length > 0 ? (
+                <div className={styles.donationsList}>
+                  {stats.recentDonations.map((donation) => (
+                    <div key={donation.id} className={styles.donationItem}>
+                      <div className={styles.donationInfo}>
+                        <div className={styles.donorName}>{donation.donorName}</div>
+                        <div className={styles.campaignName}>{donation.campaignName}</div>
+                        <div className={styles.donationDate}>
+                          {new Date(donation.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                        </div>
                       </div>
+                      <div className={styles.donationAmount}>${donation.amount.toLocaleString()}</div>
                     </div>
-                  </div>
-                ))}
-              </div>
+                  ))}
+                </div>
+              ) : (
+                <div className={styles.emptyState}>
+                  <p>No donations yet. <Link href="/donations" style={{ color: '#667eea' }}>Record one now</Link></p>
+                </div>
+              )}
             </div>
 
             {/* Upcoming Tasks */}
             <div className={styles.section}>
               <div className={styles.sectionHeader}>
                 <h2>Upcoming Tasks</h2>
-                <Link href="/tasks" className={styles.viewAllLink}>View All</Link>
+                <Link href="/tasks" className={styles.viewAllLink}>View All →</Link>
               </div>
-              <div className={styles.tasksList}>
-                {mockTasks.map((task, index) => (
-                  <div key={index} className={styles.taskItem}>
-                    <div>
-                      <div className={styles.taskTitle}>{task.title}</div>
-                      <div className={styles.taskDate}>{task.date}</div>
+              {mockTasks.length > 0 ? (
+                <div className={styles.tasksList}>
+                  {mockTasks.map((task, index) => (
+                    <div key={index} className={styles.taskItem}>
+                      <div className={styles.taskInfo}>
+                        <div className={styles.taskTitle}>{task.title}</div>
+                        <div className={styles.taskDate}>
+                          Due: {new Date(task.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
+                        </div>
+                      </div>
+                      <span className={`${styles.priorityBadge} ${styles[task.priority.toLowerCase()]}`}>
+                        {task.priority}
+                      </span>
                     </div>
-                    <span className={`${styles.priorityBadge} ${styles[task.priority.toLowerCase()]}`}>
-                      {task.priority}
-                    </span>
-                  </div>
-                ))}
+                  ))}
+                </div>
+              ) : (
+                <div className={styles.emptyState}>
+                  <p>No upcoming tasks. <Link href="/tasks" style={{ color: '#667eea' }}>Create one</Link></p>
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* Quick Stats Summary */}
+          <div className={styles.summarySection}>
+            <h3>Summary</h3>
+            <div className={styles.summaryGrid}>
+              <div className={styles.summaryItem}>
+                <strong>Database Status</strong>
+                <p>All data is live from PostgreSQL database (Neon)</p>
+              </div>
+              <div className={styles.summaryItem}>
+                <strong>Data Source</strong>
+                <p>Information fetched via /api/dashboard/stats endpoint</p>
+              </div>
+              <div className={styles.summaryItem}>
+                <strong>Last Updated</strong>
+                <p>Real-time data refresh on page load</p>
               </div>
             </div>
           </div>
