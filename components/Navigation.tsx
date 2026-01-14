@@ -82,6 +82,9 @@ export default function Navigation() {
                 <Link href="/why-dono">Why Dono</Link>
               </li>
               <li>
+                <Link href="/ai-policy">AI Policy</Link>
+              </li>
+              <li>
                 <Link href="/auth/signin">Sign In</Link>
               </li>
               <li>
