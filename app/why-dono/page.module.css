@@ -1,0 +1,497 @@
+.container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 2rem;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+}
+
+.backLink {
+  display: inline-block;
+  color: white;
+  text-decoration: none;
+  margin-bottom: 2rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  opacity: 0.9;
+}
+
+.backLink:hover {
+  opacity: 1;
+  transform: translateX(-4px);
+}
+
+.header {
+  max-width: 900px;
+  margin: 0 auto 3rem;
+  text-align: center;
+  color: white;
+  padding: 2rem 0;
+}
+
+.header h1 {
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.subtitle {
+  font-size: 1.25rem;
+  opacity: 0.95;
+  font-weight: 300;
+}
+
+.section {
+  max-width: 900px;
+  margin: 0 auto 3rem;
+  background: white;
+  border-radius: 12px;
+  padding: 2.5rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.sectionTitle {
+  font-size: 2rem;
+  margin: 0 0 1.5rem 0;
+  color: #333;
+  border-bottom: 3px solid #667eea;
+  padding-bottom: 1rem;
+  font-weight: 600;
+}
+
+.content {
+  color: #555;
+  line-height: 1.8;
+  font-size: 1rem;
+}
+
+.content p {
+  margin-bottom: 1rem;
+}
+
+.ideaBox {
+  background: linear-gradient(135deg, #f5f7ff 0%, #fff5f7 100%);
+  padding: 1.5rem;
+  border-left: 4px solid #667eea;
+  border-radius: 8px;
+  margin: 1.5rem 0;
+}
+
+.ideaBox h3 {
+  color: #333;
+  margin: 0 0 1rem 0;
+  font-size: 1.2rem;
+}
+
+.ideaBox ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.ideaBox li {
+  margin-bottom: 0.75rem;
+  padding-left: 1.5rem;
+  position: relative;
+  color: #555;
+}
+
+.ideaBox li:before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: #667eea;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+/* Feature Grid */
+.featureGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.featureCard {
+  background: linear-gradient(135deg, #f9fafb 0%, #ffffff 100%);
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.featureCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(102, 126, 234, 0.15);
+  border-color: #667eea;
+}
+
+.featureIcon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  display: inline-block;
+}
+
+.featureCard h3 {
+  color: #333;
+  margin: 0.5rem 0 1rem 0;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.featureWhy {
+  color: #666;
+  margin-bottom: 0.75rem;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.featureWhy strong {
+  color: #667eea;
+}
+
+.featureBenefit {
+  color: #555;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  padding: 0.75rem;
+  background: white;
+  border-radius: 6px;
+  border-left: 3px solid #764ba2;
+}
+
+.featureBenefit strong {
+  color: #764ba2;
+}
+
+/* Challenges Section */
+.challengesList {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.challengeItem {
+  display: flex;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  background: #f9fafb;
+  border-radius: 10px;
+  border-left: 4px solid #667eea;
+  transition: all 0.3s ease;
+}
+
+.challengeItem:hover {
+  background: #f0f4ff;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.1);
+}
+
+.challengeNumber {
+  flex-shrink: 0;
+  width: 50px;
+  height: 50px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+
+.challengeContent h3 {
+  color: #333;
+  margin: 0 0 0.75rem 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.challengeContent p {
+  color: #555;
+  margin: 0.5rem 0;
+  line-height: 1.7;
+  font-size: 0.95rem;
+}
+
+.challengeContent strong {
+  color: #667eea;
+  font-weight: 600;
+}
+
+/* Architecture Boxes */
+.architectureBox {
+  background: linear-gradient(135deg, #f5f7ff 0%, #f0f4ff 100%);
+  padding: 1.5rem;
+  border-radius: 10px;
+  margin-bottom: 1.5rem;
+  border: 1px solid #e0e7ff;
+}
+
+.architectureBox h3 {
+  color: #333;
+  margin: 0 0 1rem 0;
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+.pagesList {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.pageGroup h4 {
+  color: #667eea;
+  margin: 0 0 0.75rem 0;
+  font-size: 1.05rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.pageGroup ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.pageGroup li {
+  color: #555;
+  padding: 0.5rem 0;
+  line-height: 1.6;
+  font-size: 0.95rem;
+}
+
+.pageGroup strong {
+  color: #333;
+  font-weight: 600;
+}
+
+/* Database Schema */
+.dbSchema {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.tableItem {
+  background: white;
+  padding: 1.25rem;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+  transition: all 0.3s ease;
+}
+
+.tableItem:hover {
+  border-color: #667eea;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.1);
+}
+
+.tableItem h4 {
+  color: #667eea;
+  margin: 0 0 0.5rem 0;
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.tableItem p {
+  color: #555;
+  margin: 0.5rem 0;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.tableItem strong {
+  color: #333;
+  font-weight: 600;
+}
+
+/* Data Flow */
+.dataFlowBox {
+  background: linear-gradient(135deg, #fff5f7 0%, #f5f7ff 100%);
+  padding: 1.5rem;
+  border-radius: 10px;
+  border: 1px solid #f0d9e8;
+}
+
+.dataFlowBox h3 {
+  color: #333;
+  margin: 0 0 1.5rem 0;
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+.flowItem {
+  margin-bottom: 1.5rem;
+}
+
+.flowItem:last-child {
+  margin-bottom: 0;
+}
+
+.flowItem strong {
+  display: block;
+  color: #667eea;
+  font-size: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.flowSteps {
+  background: white;
+  border-radius: 8px;
+  padding: 1rem;
+  border-left: 3px solid #764ba2;
+}
+
+.flowSteps div {
+  color: #555;
+  padding: 0.5rem 0;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.flowSteps div:before {
+  content: '→ ';
+  color: #764ba2;
+  font-weight: bold;
+  margin-right: 0.5rem;
+}
+
+/* Philosophy Box */
+.philosophyBox {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.philosophyBox h3 {
+  color: #667eea;
+  margin: 0.5rem 0 0.5rem 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.philosophyBox p {
+  color: #555;
+  line-height: 1.7;
+  font-size: 0.95rem;
+  margin: 0 0 1rem 0;
+  padding-left: 1rem;
+  border-left: 3px solid #667eea;
+}
+
+/* CTA Section */
+.ctaSection {
+  max-width: 900px;
+  margin: 3rem auto;
+  text-align: center;
+  padding: 2rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.ctaSection h3 {
+  color: #333;
+  margin: 0 0 1rem 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.ctaButton {
+  display: inline-block;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 1rem 2.5rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.05rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+  cursor: pointer;
+}
+
+.ctaButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+  }
+
+  .header h1 {
+    font-size: 2rem;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+  }
+
+  .section {
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .sectionTitle {
+    font-size: 1.5rem;
+  }
+
+  .featureGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .pagesList {
+    grid-template-columns: 1fr;
+  }
+
+  .dbSchema {
+    grid-template-columns: 1fr;
+  }
+
+  .challengeItem {
+    flex-direction: column;
+  }
+
+  .challengeNumber {
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+  }
+
+  .ctaButton {
+    padding: 0.85rem 2rem;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .header h1 {
+    font-size: 1.5rem;
+  }
+
+  .sectionTitle {
+    font-size: 1.25rem;
+  }
+
+  .section {
+    padding: 1rem;
+  }
+
+  .content {
+    font-size: 0.9rem;
+  }
+
+  .philosophyBox p {
+    font-size: 0.9rem;
+  }
+}
