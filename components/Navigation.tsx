@@ -76,6 +76,9 @@ export default function Navigation() {
           ) : (
             <>
               <li>
+                <Link href="/about">About</Link>
+              </li>
+              <li>
                 <Link href="/auth/signin">Sign In</Link>
               </li>
               <li>
