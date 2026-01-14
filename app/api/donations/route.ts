@@ -104,7 +104,7 @@ export async function GET(req: NextRequest) {
       },
     });
 
-    return NextResponse.json({ donations }, { status: 200 });
+    return NextResponse.json(donations, { status: 200 });
   } catch (error) {
     console.error('Error fetching donations:', error);
     return NextResponse.json(

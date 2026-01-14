@@ -1,0 +1,507 @@
+.container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 2rem;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+}
+
+.backLink {
+  display: inline-block;
+  color: white;
+  text-decoration: none;
+  margin-bottom: 2rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  opacity: 0.9;
+}
+
+.backLink:hover {
+  opacity: 1;
+  transform: translateX(-4px);
+}
+
+.header {
+  max-width: 900px;
+  margin: 0 auto 3rem;
+  text-align: center;
+  color: white;
+  padding: 2rem 0;
+}
+
+.header h1 {
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.subtitle {
+  font-size: 1.25rem;
+  opacity: 0.95;
+  font-weight: 300;
+}
+
+.section {
+  max-width: 900px;
+  margin: 0 auto 3rem;
+  background: white;
+  border-radius: 12px;
+  padding: 2.5rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.sectionTitle {
+  font-size: 1.8rem;
+  margin: 0 0 1.5rem 0;
+  color: #333;
+  border-bottom: 3px solid #667eea;
+  padding-bottom: 1rem;
+  font-weight: 600;
+}
+
+.content {
+  color: #555;
+  line-height: 1.8;
+  font-size: 1rem;
+}
+
+.content p {
+  margin-bottom: 1rem;
+}
+
+.content h3 {
+  color: #333;
+  margin: 1.5rem 0 1rem 0;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.content ul {
+  margin-bottom: 1rem;
+  padding-left: 1.5rem;
+}
+
+.content li {
+  margin-bottom: 0.75rem;
+  line-height: 1.6;
+}
+
+/* Feature Box */
+.featureBox {
+  background: linear-gradient(135deg, #f5f7ff 0%, #fff5f7 100%);
+  padding: 1.5rem;
+  border-left: 4px solid #667eea;
+  border-radius: 8px;
+  margin: 1.5rem 0;
+}
+
+.featureBox h3 {
+  color: #333;
+  margin: 0 0 1rem 0;
+  font-size: 1.1rem;
+}
+
+.featureBox ul {
+  margin: 0;
+  padding-left: 1.5rem;
+}
+
+.featureBox li {
+  margin-bottom: 0.75rem;
+  color: #555;
+}
+
+/* Model Comparison */
+.modelComparison {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin: 2rem 0;
+}
+
+.comparisonItem {
+  background: linear-gradient(135deg, #f9fafb 0%, #ffffff 100%);
+  padding: 1.5rem;
+  border-radius: 10px;
+  border: 1px solid #e5e7eb;
+}
+
+.comparisonItem h4 {
+  color: #333;
+  margin: 0 0 1rem 0;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.comparisonItem ul {
+  margin: 0;
+  padding-left: 1.5rem;
+}
+
+.comparisonItem li {
+  margin-bottom: 0.6rem;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+/* Algorithm Box */
+.algoBox {
+  background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+  padding: 1.5rem;
+  border-left: 4px solid #4caf50;
+  border-radius: 8px;
+  margin: 1.5rem 0;
+}
+
+.algoBox p {
+  margin: 0.75rem 0;
+  color: #2e7d32;
+  font-weight: 500;
+}
+
+/* Algorithm Steps */
+.algorithmSteps {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.step {
+  display: flex;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  background: #f9fafb;
+  border-radius: 10px;
+  border-left: 4px solid #667eea;
+}
+
+.stepNumber {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.stepContent h4 {
+  margin: 0 0 0.5rem 0;
+  color: #333;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.stepContent p {
+  margin: 0;
+  color: #666;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.stepContent ul {
+  margin: 0;
+  padding-left: 1.5rem;
+}
+
+.stepContent li {
+  margin: 0.4rem 0;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+/* Code Box */
+.codeBox {
+  background: #1e1e1e;
+  padding: 1.5rem;
+  border-radius: 10px;
+  margin: 1.5rem 0;
+  overflow-x: auto;
+}
+
+.codeBox h3 {
+  color: #4caf50;
+  margin: 0 0 1rem 0;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.codeBox pre {
+  margin: 0;
+  color: #d4d4d4;
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  overflow: auto;
+  max-height: 400px;
+}
+
+/* Practices List */
+.practicesList {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.practiceItem {
+  padding: 1.5rem;
+  background: linear-gradient(135deg, #f5f7ff 0%, #f0f4ff 100%);
+  border-left: 4px solid #667eea;
+  border-radius: 10px;
+}
+
+.practiceItem h4 {
+  color: #333;
+  margin: 0 0 0.75rem 0;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.practiceItem p {
+  margin: 0;
+  color: #666;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+/* Prompt Steps */
+.promptSteps {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.promptItem {
+  padding: 1.5rem;
+  background: linear-gradient(135deg, #fff5f7 0%, #f5f7ff 100%);
+  border-left: 4px solid #764ba2;
+  border-radius: 10px;
+}
+
+.promptItem h4 {
+  color: #333;
+  margin: 0 0 0.75rem 0;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.promptItem p {
+  margin: 0;
+  color: #666;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.promptItem ul {
+  margin: 0.75rem 0 0 0;
+  padding-left: 1.5rem;
+}
+
+.promptItem li {
+  margin: 0.4rem 0;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+/* Improvement Grid */
+.improvementGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.improvement {
+  padding: 1.5rem;
+  background: white;
+  border: 2px solid #667eea;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+.improvement:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(102, 126, 234, 0.2);
+}
+
+.improvement h4 {
+  color: #667eea;
+  margin: 0 0 0.75rem 0;
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.improvement p {
+  margin: 0.5rem 0;
+  color: #666;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.impact {
+  margin-top: 1rem !important;
+  padding-top: 1rem;
+  border-top: 1px solid #e5e7eb;
+  color: #2e7d32;
+  font-weight: 500;
+}
+
+/* Limitations List */
+.limitationsList {
+  list-style: none;
+  padding: 0;
+  margin: 1.5rem 0;
+}
+
+.limitationsList li {
+  padding: 1rem;
+  margin-bottom: 0.75rem;
+  background: #f9fafb;
+  border-radius: 8px;
+  border-left: 3px solid #667eea;
+  color: #555;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+/* Compliance Box */
+.complianceBox {
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  background: linear-gradient(135deg, rgba(76, 175, 80, 0.05), rgba(76, 175, 80, 0.02));
+  border-left: 4px solid #4caf50;
+  border-radius: 8px;
+}
+
+.complianceBox h4 {
+  color: #2e7d32;
+  margin: 0 0 0.75rem 0;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.complianceBox p {
+  margin: 0;
+  color: #555;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+/* CTA Section */
+.ctaSection {
+  max-width: 900px;
+  margin: 3rem auto;
+  text-align: center;
+  padding: 2rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.ctaSection h3 {
+  color: #333;
+  margin: 0 0 1rem 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.ctaSection p {
+  color: #666;
+  margin: 0 0 1.5rem 0;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.ctaButton {
+  display: inline-block;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 1rem 2.5rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.05rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+  cursor: pointer;
+}
+
+.ctaButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+  }
+
+  .header h1 {
+    font-size: 2rem;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+  }
+
+  .section {
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .sectionTitle {
+    font-size: 1.3rem;
+  }
+
+  .modelComparison {
+    grid-template-columns: 1fr;
+  }
+
+  .improvementGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .step {
+    flex-direction: column;
+  }
+
+  .stepNumber {
+    align-self: flex-start;
+  }
+
+  .ctaButton {
+    padding: 0.85rem 2rem;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .header h1 {
+    font-size: 1.5rem;
+  }
+
+  .sectionTitle {
+    font-size: 1.1rem;
+  }
+
+  .section {
+    padding: 1rem;
+  }
+
+  .content {
+    font-size: 0.9rem;
+  }
+
+  .codeBox pre {
+    font-size: 0.75rem;
+  }
+}
