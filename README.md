@@ -478,6 +478,128 @@ Basic testing setup (extend as needed):
 npm test
 ```
 
+---
+
+## 🎓 Reflection: Learning & Growth
+
+### What Challenged Me the Most
+
+**1. Database Schema Design**
+The biggest challenge was designing a schema that could track complex donor relationships without redundancy. Initially, I struggled with:
+- How to aggregate donation data (sum totals, count donations, calculate risk levels)
+- Whether to store calculated values or compute them on-demand
+- **Solution**: Learned to embrace computation over storage—calculating aggregates in queries/components was cleaner and more maintainable than trying to keep denormalized fields synchronized
+
+**2. AI Implementation Responsibility**
+Building an "AI feature" without using external APIs (OpenAI, etc.) felt like a constraint at first. I had to:
+- Prove that custom algorithms with transparent rules ARE "AI" (machine intelligence doesn't always mean neural networks)
+- Document responsible practices and safeguards proactively
+- **Learning**: The hardest part wasn't the algorithm—it was justifying why I built it this way and ensuring it's explainable to stakeholders
+
+**3. State Management & Real-Time Updates**
+Getting donations list to refresh correctly after adding new donations required:
+- Understanding Next.js App Router data fetching patterns
+- Properly using 'use client' vs server components
+- Managing success states and temporary UI feedback
+- **Solution**: Learned to fetch fresh data from API rather than trying to manage state in components—cleaner and less prone to sync errors
+
+**4. Building a Real Product (Not Just Features)**
+The hardest part wasn't coding individual features—it was thinking like a nonprofit operator:
+- What metrics matter most? (retention, engagement, risk)
+- How does this actually get used day-to-day?
+- What decisions does this enable?
+- **Learning**: The best code is invisible; the best product solves real problems in the smallest number of clicks
+
+### What I'd Change/Add With More Time
+
+**Short-term (1-2 weeks)**
+1. **Email Integration** - Send automated thank you emails and re-engagement campaigns
+2. **Export Features** - CSV/PDF reports for board meetings and fundraising dashboards
+3. **Bulk Operations** - Import donors from CSV, bulk update statuses
+4. **Donor Portal** - Let donors view their impact and giving history
+5. **Advanced Analytics** - Year-over-year trends, cohort analysis, predictive churn modeling
+
+**Medium-term (1-2 months)**
+1. **Peer Benchmarking** - Compare fundraising metrics with similar nonprofits
+2. **Campaign Analytics** - Which campaigns attract which donor segments?
+3. **Wealth Screening Integration** - Connect with external data sources for prospect research
+4. **Multi-user Collaboration** - Notes, activity streams, task assignment with notifications
+5. **Mobile App** - React Native app for field fundraisers to update donor info on-the-go
+
+**Long-term (3-6 months)**
+1. **Predictive Models** - Machine learning to forecast who will lapse and when
+2. **Intelligent Segmentation** - Beyond rules, unsupervised clustering to discover donor archetypes
+3. **Voice of Customer** - Sentiment analysis of donor communications to understand satisfaction
+4. **Marketplace** - Pre-built integrations with CRMs, accounting software, email platforms
+5. **White-label SaaS** - Package for agencies to resell to their nonprofit clients
+
+### What I Learned About Building Real Products
+
+**1. Users Don't Care About Technical Elegance**
+I spent time optimizing database queries and designing the "perfect" component architecture. Meanwhile, users needed:
+- Results that feel instant (not technically instant)
+- One place to find what they need (not elegant separation of concerns)
+- Clear next steps (not flexible frameworks)
+
+**Lesson**: Premature optimization is the enemy. Ship first, optimize based on real usage.
+
+**2. The 80/20 Rule Is Real**
+80% of value came from 20% of features:
+- Donor list + donation tracking = 80% of user value
+- AI insights + risk levels = provided differentiating value
+- Email integration + bulk operations = nice-to-haves users would pay extra for
+
+**Lesson**: Ruthlessly prioritize. Most products fail because they're bloated, not because they're incomplete.
+
+**3. Data Quality > Quantity**
+One clean donor record with history is worth 100 incomplete leads. My schema design and validation reflected this—requiring email, enforcing data types, tracking audit trails.
+
+**Lesson**: Garbage in, garbage out. Good products have strong opinions about data quality.
+
+**4. Transparency Builds Trust**
+The AI Policy page explaining exactly how algorithms work and what limitations exist was as important as the algorithms themselves. Nonprofits work with donors' money—they need to trust the system.
+
+**Lesson**: "Black box" works for consumer apps. B2B/mission-critical needs explainability.
+
+**5. Design Compounds Over Time**
+I invested in a consistent design system (color palette, spacing, animations, responsive breakpoints). This meant:
+- New pages were fast to build (consistency already established)
+- The whole app felt coherent
+- Changes were easy (update one variable, propagate everywhere)
+
+**Lesson**: Good design systems cost more upfront but multiply velocity later.
+
+### How AI Helped (and Where It Didn't)
+
+**Where AI Was Genuinely Helpful ✅**
+
+1. **Code Generation** - AI excels at scaffolding. "Create a Next.js API endpoint for donations" generated 80% correct code I just adjusted
+2. **Problem Solving** - Stuck on TypeScript type issues? AI suggestions usually pointed me toward the right solution (even if not exactly right)
+3. **Documentation** - Writing comprehensive docs for complex features is tedious; AI drafting them saved hours
+4. **Learning** - Explaining concepts I was fuzzy on (Prisma relations, CSS Grid layouts) quickly
+
+**Where AI Fell Short ❌**
+
+1. **Architectural Decisions** - AI can code a solution, but deciding WHETHER to build it or HOW to fit it into the system requires human judgment
+2. **Business Logic** - "Generate a risk scoring algorithm" gave me mathematically pretty code that didn't match real nonprofit donor behavior—I had to rewrite it
+3. **Debugging** - When the donations list wasn't updating correctly, AI guesses were scattered. Understanding Next.js data fetching patterns required reading docs and hands-on testing
+4. **Edge Cases** - AI generates happy-path code. Real apps live in edge cases (what if email is null? what if donation amount is 0? what if user has 10,000 donors?)
+
+**Where I Wish I Used AI More**
+- Testing—I didn't write comprehensive tests, and AI could have helped here
+- Security analysis—I did basic security, but AI could have found vulnerabilities
+- Performance profiling—Rather than guessing, AI tools could have identified actual bottlenecks
+
+**The Meta-Lesson**
+AI is a **multiplier on human judgment**. If you know what you're building and why, AI gets you 80% of the way there. If you're confused about direction, AI makes you 80% more confused. The human has to set the vision; AI executes it.
+
+For this project specifically:
+- AI was excellent for "implement this feature" once I knew what the feature was
+- AI was less helpful for "what should the feature be" or "is this the right approach"
+- The most valuable AI use was thinking partner: "Hey, I'm stuck—here are my options..." AI helped me think through tradeoffs
+
+---
+
 ## 🐛 Troubleshooting
 
 ### Database Connection Issues
