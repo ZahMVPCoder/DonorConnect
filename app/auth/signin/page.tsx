@@ -100,6 +100,20 @@ export default function SignIn() {
           Don't have an account?{' '}
           <Link href="/auth/signup">Create one here</Link>
         </p>
+
+        <div className={styles.demoSection}>
+          <h3 className={styles.demoTitle}>Demo Account</h3>
+          <div className={styles.demoCredentials}>
+            <div className={styles.credentialItem}>
+              <span className={styles.credentialLabel}>Email:</span>
+              <span className={styles.credentialValue}>rob@launchpadphilly.org</span>
+            </div>
+            <div className={styles.credentialItem}>
+              <span className={styles.credentialLabel}>Password:</span>
+              <span className={styles.credentialValue}>lpuser1</span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

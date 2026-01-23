@@ -1,4 +1,5 @@
 import { PrismaClient } from '@prisma/client';
+import bcrypt from 'bcryptjs';
 
 const prisma = new PrismaClient();
 
@@ -8,6 +9,18 @@ async function main() {
   await prisma.donation.deleteMany();
   await prisma.campaign.deleteMany();
   await prisma.donor.deleteMany();
+  await prisma.user.deleteMany();
+
+  // Create demo user
+  const hashedPassword = await bcrypt.hash('lpuser1', 10);
+  await prisma.user.create({
+    data: {
+      email: 'rob@launchpadphilly.org',
+      username: 'robdemo',
+      password: hashedPassword,
+      role: 'admin',
+    },
+  });
 
   // Create donors
   const donors = await Promise.all([
