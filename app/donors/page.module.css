@@ -258,6 +258,28 @@
   transform: translateX(2px);
 }
 
+.deleteButton {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 6px 10px;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  opacity: 0.6;
+}
+
+.deleteButton:hover:not(:disabled) {
+  background: rgba(244, 67, 54, 0.1);
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+.deleteButton:disabled {
+  cursor: not-allowed;
+  opacity: 0.3;
+}
+
 @media (max-width: 768px) {
   .header {
     flex-direction: column;

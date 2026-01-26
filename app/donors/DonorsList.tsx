@@ -26,6 +26,7 @@ export default function DonorsList({ initialDonors }: DonorsListProps) {
   const [filterStatus, setFilterStatus] = useState('All Status');
   const [showSuccessToast, setShowSuccessToast] = useState(false);
   const [successMessage, setSuccessMessage] = useState('');
+  const [deletingId, setDeletingId] = useState<string | null>(null);
 
   const getStatusColor = (status: string) => {
     const statusMap: { [key: string]: string } = {
@@ -34,6 +35,34 @@ export default function DonorsList({ initialDonors }: DonorsListProps) {
       'Major': '#2196f3',
     };
     return statusMap[status] || '#999';
+  };
+
+  const handleDeleteDonor = async (donorId: string, donorName: string) => {
+    if (!confirm(`Are you sure you want to delete ${donorName}? This will also delete all their donations and tasks.`)) {
+      return;
+    }
+
+    setDeletingId(donorId);
+    try {
+      const response = await fetch(`/api/donors/${donorId}`, {
+        method: 'DELETE',
+      });
+
+      if (response.ok) {
+        setDonors(donors.filter(d => d.id !== donorId));
+        setSuccessMessage(`✓ ${donorName} has been deleted successfully!`);
+        setShowSuccessToast(true);
+        setTimeout(() => setShowSuccessToast(false), 4000);
+      } else {
+        const error = await response.json();
+        alert(`Failed to delete donor: ${error.error}`);
+      }
+    } catch (error) {
+      console.error('Error deleting donor:', error);
+      alert('Failed to delete donor. Please try again.');
+    } finally {
+      setDeletingId(null);
+    }
   };
 
   const filteredDonors = donors.filter((donor) => {
@@ -176,12 +205,22 @@ export default function DonorsList({ initialDonors }: DonorsListProps) {
                     </span>
                   </td>
                   <td>
-                    <Link
-                      href={`/donors/${donor.id}`}
-                      className={styles.actionLink}
-                    >
-                      View Profile
-                    </Link>
+                    <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+                      <Link
+                        href={`/donors/${donor.id}`}
+                        className={styles.actionLink}
+                      >
+                        View Profile
+                      </Link>
+                      <button
+                        onClick={() => handleDeleteDonor(donor.id, donor.name)}
+                        disabled={deletingId === donor.id}
+                        className={styles.deleteButton}
+                        title="Delete donor"
+                      >
+                        {deletingId === donor.id ? '...' : '🗑️'}
+                      </button>
+                    </div>
                   </td>
                 </tr>
               ))
