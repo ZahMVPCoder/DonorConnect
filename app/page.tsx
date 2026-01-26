@@ -27,23 +27,22 @@ interface DashboardStats {
 }
 
 interface Task {
+  id: string;
   title: string;
-  date: string;
+  dueDate: string;
   priority: 'High' | 'Medium' | 'Low';
+  donor?: {
+    name: string;
+  };
 }
 
 export default function Dashboard() {
   const router = useRouter();
   const [user, setUser] = useState<User | null>(null);
   const [stats, setStats] = useState<DashboardStats | null>(null);
+  const [tasks, setTasks] = useState<Task[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
-
-  const mockTasks: Task[] = [
-    { title: 'Thank you call - John Smith', date: '2025-12-17', priority: 'High' },
-    { title: 'Follow-up email - Sarah Johnson', date: '2025-12-18', priority: 'Medium' },
-    { title: 'Quarterly report to board', date: '2025-12-20', priority: 'High' },
-  ];
 
   useEffect(() => {
     const fetchData = async () => {
@@ -66,6 +65,13 @@ export default function Dashboard() {
           // User not authenticated in database
           localStorage.removeItem('user');
           setUser(null);
+        }
+
+        // Fetch upcoming tasks
+        const tasksResponse = await fetch('/api/tasks');
+        if (tasksResponse.ok) {
+          const tasksData = await tasksResponse.json();
+          setTasks(tasksData);
         }
       } catch (err) {
         console.error('Error fetching data:', err);
@@ -204,14 +210,14 @@ export default function Dashboard() {
                 <h2>Upcoming Tasks</h2>
                 <Link href="/tasks" className={styles.viewAllLink}>View All →</Link>
               </div>
-              {mockTasks.length > 0 ? (
+              {tasks.length > 0 ? (
                 <div className={styles.tasksList}>
-                  {mockTasks.map((task, index) => (
-                    <div key={index} className={styles.taskItem}>
+                  {tasks.map((task) => (
+                    <div key={task.id} className={styles.taskItem}>
                       <div className={styles.taskInfo}>
                         <div className={styles.taskTitle}>{task.title}</div>
                         <div className={styles.taskDate}>
-                          Due: {new Date(task.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
+                          Due: {new Date(task.dueDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
                         </div>
                       </div>
                       <span className={`${styles.priorityBadge} ${styles[task.priority.toLowerCase()]}`}>
