@@ -15,16 +15,18 @@ export async function GET(request: NextRequest) {
       );
     }
 
+    const userId = authCookie;
+
     // Get current month dates
     const now = new Date();
     const currentMonthStart = new Date(now.getFullYear(), now.getMonth(), 1);
     const currentMonthEnd = new Date(now.getFullYear(), now.getMonth() + 1, 0);
 
-    // Calculate total raised this month
+    // Calculate total raised this month (only for this user's donors)
     const thisMonthDonations = await prisma.donation.findMany({
       where: {
         donor: {
-          // Optionally filter by user if donations had a userId field
+          userId: userId,
         },
         date: {
           gte: currentMonthStart,
@@ -38,8 +40,13 @@ export async function GET(request: NextRequest) {
 
     const totalRaisedThisMonth = thisMonthDonations.reduce((sum, d) => sum + d.amount, 0);
 
-    // Get recent donations
+    // Get recent donations (only for this user's donors)
     const recentDonations = await prisma.donation.findMany({
+      where: {
+        donor: {
+          userId: userId,
+        },
+      },
       take: 3,
       orderBy: { date: 'desc' },
       include: {
@@ -48,9 +55,10 @@ export async function GET(request: NextRequest) {
       },
     });
 
-    // Count new donors this month
+    // Count new donors this month (only for this user)
     const newDonorsThisMonth = await prisma.donor.count({
       where: {
+        userId: userId,
         createdAt: {
           gte: currentMonthStart,
           lte: currentMonthEnd,
@@ -58,10 +66,13 @@ export async function GET(request: NextRequest) {
       },
     });
 
-    // Count lapsed donors (no donations in last 90 days)
+    // Count lapsed donors (no donations in last 90 days, only for this user)
     const ninetyDaysAgo = new Date(now.getTime() - 90 * 24 * 60 * 60 * 1000);
     const donorsWithRecentDonations = await prisma.donation.findMany({
       where: {
+        donor: {
+          userId: userId,
+        },
         date: {
           gte: ninetyDaysAgo,
         },
@@ -75,14 +86,18 @@ export async function GET(request: NextRequest) {
     const recentDonorIds = donorsWithRecentDonations.map(d => d.donorId);
     const lapsedDonors = await prisma.donor.count({
       where: {
+        userId: userId,
         id: {
-          notIn: recentDonorIds,
+          notIn: recentDonorIds.length > 0 ? recentDonorIds : [''], // Avoid empty array
         },
       },
     });
 
-    // Get campaigns for goal progress
+    // Get campaigns for goal progress (only for this user)
     const campaigns = await prisma.campaign.findMany({
+      where: {
+        userId: userId,
+      },
       select: {
         goal: true,
         raised: true,

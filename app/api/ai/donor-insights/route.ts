@@ -25,9 +25,12 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Fetch donor data with donation history
+    // Fetch donor data with donation history (verify it belongs to this user)
     const donor = await prisma.donor.findUnique({
-      where: { id: donorId },
+      where: { 
+        id: donorId,
+        userId: authCookie,
+      },
       include: {
         donations: {
           orderBy: { date: 'desc' },

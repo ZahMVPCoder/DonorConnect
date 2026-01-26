@@ -5,10 +5,24 @@ export const dynamic = 'force-dynamic';
 
 export async function GET(request: NextRequest) {
   try {
+    // Get user ID from auth cookie
+    const authCookie = request.cookies.get('auth-user')?.value;
+
+    if (!authCookie) {
+      return NextResponse.json(
+        { error: 'Unauthorized' },
+        { status: 401 }
+      );
+    }
+
+    const userId = authCookie;
     const searchParams = request.nextUrl.searchParams;
     const all = searchParams.get('all');
 
     let query: any = {
+      where: {
+        userId: userId,
+      },
       select: {
         id: true,
         name: true,
@@ -27,6 +41,9 @@ export async function GET(request: NextRequest) {
 
     // For refreshing donor list in frontend
     const donors = await prisma.donor.findMany({
+      where: {
+        userId: userId,
+      },
       include: {
         donations: true,
       },
@@ -47,6 +64,17 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   try {
+    // Get user ID from auth cookie
+    const authCookie = request.cookies.get('auth-user')?.value;
+
+    if (!authCookie) {
+      return NextResponse.json(
+        { error: 'Unauthorized' },
+        { status: 401 }
+      );
+    }
+
+    const userId = authCookie;
     const body = await request.json();
     const { name, email, status, totalGiving, lastGiftAmount } = body;
 
@@ -70,12 +98,13 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Create donor
+    // Create donor and associate with user
     const donor = await prisma.donor.create({
       data: {
         name,
         email,
         status: status || 'Active',
+        userId: userId,
       },
       include: {
         donations: true,
@@ -84,7 +113,10 @@ export async function POST(request: NextRequest) {
 
     // If last gift amount is provided, create a donation record
     if (lastGiftAmount && lastGiftAmount > 0) {
-      const campaign = await prisma.campaign.findFirst({ select: { id: true } });
+      const campaign = await prisma.campaign.findFirst({ 
+        where: { userId: userId },
+        select: { id: true } 
+      });
       await prisma.donation.create({
         data: {
           donorId: donor.id,

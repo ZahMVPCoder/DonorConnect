@@ -2,6 +2,9 @@
   "name": "dono-management-system",
   "version": "1.0.0",
   "description": "A Donor CRM management system built with Next.js and Prisma",
+  "prisma": {
+    "seed": "node prisma/seed.js"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",

@@ -13,7 +13,7 @@ async function main() {
 
   // Create demo user
   const hashedPassword = await bcrypt.hash('lpuser1', 10);
-  await prisma.user.create({
+  const demoUser = await prisma.user.create({
     data: {
       email: 'rob@launchpadphilly.org',
       username: 'robdemo',
@@ -22,13 +22,14 @@ async function main() {
     },
   });
 
-  // Create donors
+  // Create donors associated with the demo user
   const donors = await Promise.all([
     prisma.donor.create({
       data: {
         name: 'John Smith',
         email: 'john.smith@email.com',
         status: 'Active',
+        userId: demoUser.id,
       },
     }),
     prisma.donor.create({
@@ -36,6 +37,7 @@ async function main() {
         name: 'Sarah Johnson',
         email: 'sarah.j@email.com',
         status: 'Active',
+        userId: demoUser.id,
       },
     }),
     prisma.donor.create({
@@ -43,6 +45,7 @@ async function main() {
         name: 'Mike Davis',
         email: 'mdavis@email.com',
         status: 'Major',
+        userId: demoUser.id,
       },
     }),
     prisma.donor.create({
@@ -50,6 +53,7 @@ async function main() {
         name: 'Emily Brown',
         email: 'ebrown@email.com',
         status: 'Lapsed',
+        userId: demoUser.id,
       },
     }),
     prisma.donor.create({
@@ -57,11 +61,12 @@ async function main() {
         name: 'Robert Wilson',
         email: 'rwilson@email.com',
         status: 'Active',
+        userId: demoUser.id,
       },
     }),
   ]);
 
-  // Create campaigns
+  // Create campaigns associated with the demo user
   const campaigns = await Promise.all([
     prisma.campaign.create({
       data: {
@@ -71,6 +76,7 @@ async function main() {
         raised: 12450,
         startDate: new Date('2025-01-01'),
         endDate: new Date('2025-12-31'),
+        userId: demoUser.id,
       },
     }),
     prisma.campaign.create({
@@ -81,6 +87,7 @@ async function main() {
         raised: 18200,
         startDate: new Date('2025-06-01'),
         endDate: new Date('2026-06-30'),
+        userId: demoUser.id,
       },
     }),
     prisma.campaign.create({
@@ -91,6 +98,7 @@ async function main() {
         raised: 8500,
         startDate: new Date('2025-09-01'),
         endDate: new Date('2025-12-31'),
+        userId: demoUser.id,
       },
     }),
   ]);
@@ -139,7 +147,7 @@ async function main() {
     }),
   ]);
 
-  // Create tasks
+  // Create tasks associated with the demo user
   await Promise.all([
     prisma.task.create({
       data: {
@@ -149,6 +157,7 @@ async function main() {
         status: 'Pending',
         dueDate: new Date('2025-12-17'),
         donorId: donors[0].id,
+        userId: demoUser.id,
       },
     }),
     prisma.task.create({
@@ -159,6 +168,7 @@ async function main() {
         status: 'Pending',
         dueDate: new Date('2025-12-18'),
         donorId: donors[1].id,
+        userId: demoUser.id,
       },
     }),
     prisma.task.create({
@@ -168,6 +178,7 @@ async function main() {
         priority: 'High',
         status: 'Pending',
         dueDate: new Date('2025-12-20'),
+        userId: demoUser.id,
       },
     }),
   ]);

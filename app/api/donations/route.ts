@@ -94,7 +94,25 @@ export async function POST(req: NextRequest) {
 
 export async function GET(req: NextRequest) {
   try {
+    // Get user ID from auth cookie
+    const authCookie = req.cookies.get('auth-user')?.value;
+
+    if (!authCookie) {
+      return NextResponse.json(
+        { error: 'Unauthorized' },
+        { status: 401 }
+      );
+    }
+
+    const userId = authCookie;
+
+    // Get donations only for this user's donors
     const donations = await prisma.donation.findMany({
+      where: {
+        donor: {
+          userId: userId,
+        },
+      },
       include: {
         donor: true,
         campaign: true,

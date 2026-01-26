@@ -16,6 +16,10 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
+  donors    Donor[]
+  campaigns Campaign[]
+  tasks     Task[]
+
   @@map("users")
 }
 
@@ -24,9 +28,11 @@ model Donor {
   name      String
   email     String   @unique
   status    String   @default("Active") // Active, Lapsed, Prospect
+  userId    String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
+  user      User       @relation(fields: [userId], references: [id])
   donations Donation[]
   tasks     Task[]
 
@@ -56,9 +62,11 @@ model Campaign {
   raised     Float    @default(0)
   startDate  DateTime
   endDate    DateTime
+  userId     String
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
 
+  user      User       @relation(fields: [userId], references: [id])
   donations Donation[]
 
   @@map("campaigns")
@@ -73,9 +81,11 @@ model Task {
   type        String   @default("Follow-up") // Thank You, Follow-up, Administrative
   dueDate     DateTime
   donorId     String?
+  userId      String
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
+  user  User   @relation(fields: [userId], references: [id])
   donor Donor? @relation(fields: [donorId], references: [id])
 
   @@map("tasks")
