@@ -78,6 +78,9 @@ export default async function DonorProfilePage({ params }: { params: Params }) {
             </span>
           </div>
         </div>
+        <Link href={`/donors/${donor.id}/insights`} className={styles.insightsButton}>
+          🤖 AI Insights
+        </Link>
       </div>
 
       {/* Key Metrics */}

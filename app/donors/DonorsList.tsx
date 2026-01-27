@@ -82,12 +82,13 @@ export default function DonorsList({ initialDonors }: DonorsListProps) {
       const response = await fetch('/api/donors?all=true');
       if (response.ok) {
         const updatedDonors = await response.json();
-        // Calculate totals for new donors
+        // Calculate totals for all donors
         const donorsWithTotals = updatedDonors.map((donor: any) => ({
           ...donor,
-          totalGiving: 0,
-          lastGift: null,
-          donations: [],
+          totalGiving: donor.donations.reduce((sum: number, d: any) => sum + d.amount, 0),
+          lastGift: donor.donations.length > 0
+            ? Math.max(...donor.donations.map((d: any) => new Date(d.date).getTime()))
+            : null,
         }));
         setDonors(donorsWithTotals);
         
@@ -227,7 +228,15 @@ export default function DonorsList({ initialDonors }: DonorsListProps) {
             ) : (
               <tr>
                 <td colSpan={5} className={styles.noResults}>
-                  No donors found
+                  {searchTerm || filterStatus !== 'All Status' ? (
+                    'No donors found matching your filters'
+                  ) : (
+                    <div className={styles.emptyState}>
+                      <div className={styles.emptyIcon}>👥</div>
+                      <h3>No donors yet</h3>
+                      <p>Click the "+ Add Donor" button above to add your first donor</p>
+                    </div>
+                  )}
                 </td>
               </tr>
             )}

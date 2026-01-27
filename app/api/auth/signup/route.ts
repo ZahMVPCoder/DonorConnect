@@ -93,6 +93,22 @@ export async function POST(req: NextRequest) {
 
     console.log('User created successfully:', user.id);
 
+    // Create a default campaign for the new user
+    const currentYear = new Date().getFullYear();
+    await prisma.campaign.create({
+      data: {
+        name: `General Fund ${currentYear}`,
+        status: 'Active',
+        goal: 10000,
+        raised: 0,
+        startDate: new Date(`${currentYear}-01-01`),
+        endDate: new Date(`${currentYear}-12-31`),
+        userId: user.id,
+      },
+    });
+
+    console.log('Default campaign created for new user');
+
     return NextResponse.json(
       {
         success: true,

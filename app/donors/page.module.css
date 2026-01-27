@@ -263,21 +263,37 @@
   border: none;
   font-size: 1.2rem;
   cursor: pointer;
-  padding: 6px 10px;
+  padding: 8px 12px;
   border-radius: 6px;
   transition: all 0.3s ease;
-  opacity: 0.6;
+  opacity: 0.7;
+  position: relative;
 }
 
 .deleteButton:hover:not(:disabled) {
   background: rgba(244, 67, 54, 0.1);
   opacity: 1;
-  transform: scale(1.1);
+  transform: scale(1.15);
 }
 
 .deleteButton:disabled {
   cursor: not-allowed;
   opacity: 0.3;
+}
+
+.deleteButton:hover:not(:disabled)::after {
+  content: 'Delete';
+  position: absolute;
+  bottom: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #333;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  white-space: nowrap;
+  font-weight: 500;
 }
 
 @media (max-width: 768px) {
@@ -309,4 +325,28 @@
   padding: 40px 20px;
   color: #999;
   font-style: italic;
+}
+
+.emptyState {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.emptyIcon {
+  font-size: 4rem;
+  margin-bottom: 20px;
+  opacity: 0.3;
+}
+
+.emptyState h3 {
+  font-size: 1.5rem;
+  color: #333;
+  margin: 0 0 10px 0;
+  font-weight: 600;
+}
+
+.emptyState p {
+  color: #999;
+  margin: 0;
+  font-size: 1rem;
 }

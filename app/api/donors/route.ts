@@ -113,14 +113,36 @@ export async function POST(request: NextRequest) {
 
     // If last gift amount is provided, create a donation record
     if (lastGiftAmount && lastGiftAmount > 0) {
-      const campaign = await prisma.campaign.findFirst({ 
-        where: { userId: userId },
+      // Find an active campaign for the user, or create one if none exists
+      let campaign = await prisma.campaign.findFirst({ 
+        where: { 
+          userId: userId,
+          status: 'Active'
+        },
         select: { id: true } 
       });
+
+      // If no active campaign exists, create a default one
+      if (!campaign) {
+        const currentYear = new Date().getFullYear();
+        campaign = await prisma.campaign.create({
+          data: {
+            name: `General Fund ${currentYear}`,
+            status: 'Active',
+            goal: 10000,
+            raised: 0,
+            startDate: new Date(`${currentYear}-01-01`),
+            endDate: new Date(`${currentYear}-12-31`),
+            userId: userId,
+          },
+          select: { id: true }
+        });
+      }
+
       await prisma.donation.create({
         data: {
           donorId: donor.id,
-          campaignId: campaign?.id,
+          campaignId: campaign.id,
           amount: lastGiftAmount,
           date: new Date(),
         },

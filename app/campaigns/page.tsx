@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import prisma from '@/lib/prisma';
 import styles from './page.module.css';
 
@@ -81,7 +82,9 @@ export default async function CampaignsPage() {
                 </div>
               </div>
 
-              <button className={styles.viewDetailsButton}>View Details</button>
+              <Link href={`/campaigns/${campaign.id}`} className={styles.viewDetailsButton}>
+                View Details
+              </Link>
             </div>
           );
         })}
