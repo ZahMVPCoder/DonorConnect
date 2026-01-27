@@ -68,7 +68,7 @@ export default function Dashboard() {
         }
 
         // Fetch upcoming tasks
-        const tasksResponse = await fetch('/api/tasks');
+        const tasksResponse = await fetch('/api/tasks?limit=5');
         if (tasksResponse.ok) {
           const tasksData = await tasksResponse.json();
           setTasks(tasksData);
