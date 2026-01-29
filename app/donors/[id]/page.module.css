@@ -35,6 +35,69 @@
   align-items: flex-start;
 }
 
+.headerActions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.thankYouButton {
+  background: linear-gradient(135deg, #2196f3 0%, #1565c0 100%);
+  color: white;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(33, 150, 243, 0.3);
+  white-space: nowrap;
+  border: none;
+  cursor: pointer;
+}
+
+.thankYouButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(33, 150, 243, 0.4);
+}
+
+.thankYouToast {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: linear-gradient(135deg, rgba(33, 150, 243, 0.95), rgba(21, 101, 192, 0.95));
+  color: white;
+  padding: 18px 28px;
+  border-radius: 10px;
+  box-shadow: 0 8px 32px rgba(33, 150, 243, 0.4);
+  font-weight: 600;
+  z-index: 2000;
+  animation: slideInRight 0.3s ease, slideOutRight 0.3s ease 3.7s forwards;
+  max-width: 500px;
+  line-height: 1.5;
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(400px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideOutRight {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(400px);
+  }
+}
+
 .insightsButton {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
