@@ -38,6 +38,8 @@ export default function DonationsList() {
   const [showSuccessToast, setShowSuccessToast] = useState(false);
   const [successMessage, setSuccessMessage] = useState('');
   const [selectedDonor, setSelectedDonor] = useState<string>('All Donors');
+  const [showThankYouMessage, setShowThankYouMessage] = useState(false);
+  const [thankYouDonorName, setThankYouDonorName] = useState('');
 
   useEffect(() => {
     fetchDonations();
@@ -133,6 +135,12 @@ export default function DonationsList() {
     }
   };
 
+  const handleSendThankYou = (donorName: string) => {
+    setThankYouDonorName(donorName);
+    setShowThankYouMessage(true);
+    setTimeout(() => setShowThankYouMessage(false), 4000);
+  };
+
   const filteredData = Array.from(aggregatedData.values()).filter((item) => {
     const matchesSearch =
       item.donor.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -157,6 +165,12 @@ export default function DonationsList() {
       {showSuccessToast && (
         <div className={styles.successToast}>
           {successMessage}
+        </div>
+      )}
+
+      {showThankYouMessage && (
+        <div className={styles.thankYouToast}>
+          ✓ Thank you email sent to {thankYouDonorName}! Message: "Thank you {thankYouDonorName} for donating, your contribution will positively affect our cost!"
         </div>
       )}
 
@@ -234,6 +248,13 @@ export default function DonationsList() {
                       >
                         View Profile
                       </Link>
+                      <button
+                        className={styles.thankYouButton}
+                        onClick={() => handleSendThankYou(item.donor.name)}
+                        title="Send thank you email"
+                      >
+                        Send Thank You
+                      </button>
                       <button
                         className={styles.deleteButton}
                         onClick={() => {
