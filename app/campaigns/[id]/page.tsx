@@ -29,5 +29,16 @@ export default async function CampaignDetailsPage({ params }: { params: { id: st
     notFound();
   }
 
-  return <CampaignDetailsClient campaign={campaign} />;
+  // Serialize dates for client component
+  const serializedCampaign = {
+    ...campaign,
+    startDate: campaign.startDate.toISOString(),
+    endDate: campaign.endDate.toISOString(),
+    donations: campaign.donations.map((donation) => ({
+      ...donation,
+      date: donation.date.toISOString(),
+    })),
+  };
+
+  return <CampaignDetailsClient campaign={serializedCampaign} />;
 }
