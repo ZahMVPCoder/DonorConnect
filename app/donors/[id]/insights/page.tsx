@@ -22,9 +22,11 @@ interface DonorInsights {
   donationHistory: Array<{ amount: number; date: string; campaign: string }>;
   upcomingTasks: Array<{ title: string; dueDate: string }>;
   recommendations: Array<{
-    priority: 'high' | 'medium' | 'low';
+    priority: 'high' | 'medium' | 'low' | 'info';
+    category?: string;
     message: string;
     action: string;
+    howTo?: string;
   }>;
 }
 
@@ -115,14 +117,23 @@ export default function DonorInsights() {
       {/* AI Recommendations */}
       <div className={styles.section}>
         <h2>🤖 AI-Powered Recommendations</h2>
+        <p className={styles.sectionSubtitle}>Actionable insights to maximize donor relationships and system efficiency</p>
         <div className={styles.recommendationsList}>
           {insights.recommendations.map((rec, idx) => (
             <div key={idx} className={`${styles.recommendationCard} ${styles[rec.priority]}`}>
               <div className={styles.recHeader}>
-                <span className={styles.priorityBadge}>{rec.priority.toUpperCase()}</span>
+                <div>
+                  <span className={styles.priorityBadge}>{rec.priority.toUpperCase()}</span>
+                  {rec.category && <span className={styles.categoryBadge}>{rec.category}</span>}
+                </div>
                 <span className={styles.action}>{rec.action}</span>
               </div>
               <p className={styles.message}>{rec.message}</p>
+              {rec.howTo && (
+                <div className={styles.howTo}>
+                  <strong>💡 How to do this:</strong> {rec.howTo}
+                </div>
+              )}
             </div>
           ))}
         </div>

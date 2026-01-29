@@ -129,75 +129,144 @@
   font-size: 20px;
   font-weight: 600;
   color: #333;
-  margin-bottom: 20px;
+  margin-bottom: 8px;
   display: flex;
   align-items: center;
   gap: 10px;
+}
+
+.sectionSubtitle {
+  color: #666;
+  font-size: 14px;
+  margin-bottom: 20px;
+  font-style: italic;
 }
 
 .recommendationsList {
   list-style: none;
   padding: 0;
   margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
-.recommendation {
+.recommendationCard {
   padding: 20px;
   border-left: 4px solid #667eea;
   background-color: #f9f9f9;
-  margin-bottom: 15px;
   border-radius: 8px;
   transition: all 0.3s ease;
 }
 
-.recommendation:hover {
+.recommendationCard:hover {
   background-color: #f5f5f5;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transform: translateX(4px);
 }
 
-.recommendationHigh {
+.recommendationCard.high {
   border-left-color: #d32f2f;
   background-color: #ffebee;
 }
 
-.recommendationMedium {
+.recommendationCard.medium {
   border-left-color: #f57c00;
   background-color: #fff3e0;
 }
 
-.recommendationLow {
+.recommendationCard.low {
   border-left-color: #388e3c;
   background-color: #e8f5e9;
 }
 
-.recommendationPriority {
+.recommendationCard.info {
+  border-left-color: #2196f3;
+  background-color: #e3f2fd;
+}
+
+.recHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.priorityBadge {
   display: inline-block;
   padding: 4px 12px;
   border-radius: 12px;
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  margin-bottom: 10px;
+  margin-right: 8px;
 }
 
-.priorityHigh {
+.high .priorityBadge {
   background-color: #ef5350;
   color: white;
 }
 
-.priorityMedium {
+.medium .priorityBadge {
   background-color: #ffa726;
   color: white;
 }
 
-.priorityLow {
+.low .priorityBadge {
   background-color: #66bb6a;
   color: white;
 }
 
-.recommendationTitle {
-  font-size: 16px;
+.info .priorityBadge {
+  background-color: #42a5f5;
+  color: white;
+}
+
+.categoryBadge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 600;
+  background-color: rgba(102, 126, 234, 0.1);
+  color: #667eea;
+  letter-spacing: 0.3px;
+}
+
+.action {
+  font-size: 13px;
+  font-weight: 700;
+  color: #667eea;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.message {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #333;
+  margin: 0;
+}
+
+.howTo {
+  margin-top: 12px;
+  padding: 12px 16px;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 6px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #555;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.howTo strong {
+  color: #667eea;
+  display: block;
+  margin-bottom: 4px;
+}
   font-weight: 600;
   color: #333;
   margin: 10px 0;

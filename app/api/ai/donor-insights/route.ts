@@ -131,56 +131,170 @@ function generateDonorInsights(donor: DonorWithDetails) {
 
 function generateRecommendations(donor: DonorWithDetails, lastDonationDaysAgo: number | null) {
   const recommendations = [];
+  const totalDonations = donor.donations.reduce((sum, d) => sum + d.amount, 0);
+  const donationCount = donor.donations.length;
+
+  // System tips - always include helpful guidance
+  const systemTips = [];
+  
+  systemTips.push({
+    priority: 'info',
+    category: 'System Features',
+    message: `💡 Use the "Send Thank You" button on this page to acknowledge ${donor.name}'s contributions. Personal gratitude increases retention by 20%.`,
+    action: 'Send Thank You Message',
+  });
+
+  systemTips.push({
+    priority: 'info',
+    category: 'Task Management',
+    message: `📋 Create a task to follow up with ${donor.name}. Go to Tasks → Add Task and link it to this donor for organized relationship management.`,
+    action: 'Create Follow-up Task',
+  });
+
+  if (donationCount > 0) {
+    systemTips.push({
+      priority: 'info',
+      category: 'Campaign Tracking',
+      message: `📊 Track which campaigns resonate with ${donor.name}. Visit the Campaigns page to see their giving patterns across different initiatives.`,
+      action: 'View Campaign Analytics',
+    });
+  }
 
   // Check for lapsed donors
-  if (lastDonationDaysAgo && lastDonationDaysAgo > 90) {
+  if (lastDonationDaysAgo && lastDonationDaysAgo > 180) {
     recommendations.push({
       priority: 'high',
-      message: `${donor.name} hasn't donated in ${lastDonationDaysAgo} days. Consider a personalized re-engagement email highlighting recent impact.`,
-      action: 'Send re-engagement email',
+      category: 'Retention Alert',
+      message: `⚠️ ${donor.name} hasn't donated in ${lastDonationDaysAgo} days (${Math.round(lastDonationDaysAgo/30)} months). High lapse risk! Send a personalized re-engagement email highlighting recent impact stories.`,
+      action: 'Send Re-engagement Email',
+      howTo: 'Use the Send Thank You button, then create a task to follow up with a phone call in 1 week.',
+    });
+  } else if (lastDonationDaysAgo && lastDonationDaysAgo > 90) {
+    recommendations.push({
+      priority: 'medium',
+      category: 'Engagement Opportunity',
+      message: `📅 ${donor.name} last gave ${lastDonationDaysAgo} days ago (${Math.round(lastDonationDaysAgo/30)} months). Reach out with a campaign update before they become lapsed.`,
+      action: 'Send Campaign Update',
+      howTo: 'Create a task reminder to call them this week and share recent success stories.',
     });
   }
 
   // Check for major donors
-  const totalDonations = donor.donations.reduce((sum, d) => sum + d.amount, 0);
-  if (donor.donations.length >= 5 && totalDonations >= 1000) {
+  if (donationCount >= 5 && totalDonations >= 1000) {
     recommendations.push({
       priority: 'high',
-      message: `${donor.name} is a major donor. Schedule a thank you call to strengthen the relationship and discuss giving plans.`,
-      action: 'Schedule thank you call',
+      category: 'VIP Relationship',
+      message: `⭐ ${donor.name} is a major donor ($${totalDonations.toLocaleString()} total). Schedule a thank you call to strengthen the relationship and discuss legacy giving or planned giving opportunities.`,
+      action: 'Schedule VIP Thank You Call',
+      howTo: 'Create a high-priority task to call within 48 hours. Use the Donations page to reference their specific contributions.',
+    });
+  } else if (donationCount >= 3 && totalDonations >= 500) {
+    recommendations.push({
+      priority: 'medium',
+      category: 'Major Donor Prospect',
+      message: `🎯 ${donor.name} shows major donor potential ($${totalDonations.toLocaleString()} total, ${donationCount} gifts). Consider inviting them to an exclusive donor appreciation event or proposing a naming opportunity.`,
+      action: 'Upgrade Cultivation Strategy',
+      howTo: 'Add a task to send a personal invitation to your next donor event. Track their response in the task notes.',
     });
   }
 
   // Check for recent donors
-  if (donor.donations.length === 1) {
+  if (donationCount === 1 && lastDonationDaysAgo && lastDonationDaysAgo <= 30) {
     recommendations.push({
-      priority: 'medium',
-      message: `${donor.name} is a new donor. Send a personalized thank you and share how their donation creates impact.`,
-      action: 'Send welcome email',
+      priority: 'high',
+      category: 'New Donor Onboarding',
+      message: `🎉 ${donor.name} just made their first donation! Critical 30-day window: Send a warm welcome email and impact story. First-time donor experience determines 70% of retention.`,
+      action: 'Send Welcome Package',
+      howTo: 'Use Send Thank You button now, then create a 2-week follow-up task to share an impact report.',
     });
   }
 
   // Check for growing donors
-  if (donor.donations.length >= 2) {
+  if (donationCount >= 2) {
     const recentDonation = donor.donations[0].amount;
     const previousDonation = donor.donations[1].amount;
-    if (recentDonation > previousDonation) {
+    if (recentDonation > previousDonation * 1.5) {
+      recommendations.push({
+        priority: 'high',
+        category: 'Giving Growth',
+        message: `📈 ${donor.name} increased their donation from $${previousDonation.toLocaleString()} to $${recentDonation.toLocaleString()} (+${Math.round((recentDonation/previousDonation - 1) * 100)}%)! Acknowledge their growing commitment immediately.`,
+        action: 'Celebrate Their Growth',
+        howTo: 'Send a personalized thank you highlighting the specific impact of their increased gift. Create a task to explore monthly giving.',
+      });
+    } else if (recentDonation > previousDonation) {
       recommendations.push({
         priority: 'medium',
-        message: `${donor.name} increased their donation. Acknowledge their growing commitment and explore increased giving opportunities.`,
-        action: 'Reach out about giving levels',
+        category: 'Giving Growth',
+        message: `💚 ${donor.name} increased their donation from $${previousDonation.toLocaleString()} to $${recentDonation.toLocaleString()}. Great sign of deepening commitment!`,
+        action: 'Acknowledge Increased Giving',
+        howTo: 'Send thank you message and create a task to propose a giving level upgrade next quarter.',
       });
     }
   }
 
-  // Default recommendation
-  if (recommendations.length === 0) {
+  // Check for consistent donors
+  if (donationCount >= 3 && lastDonationDaysAgo && lastDonationDaysAgo <= 90) {
+    const avgDonation = totalDonations / donationCount;
     recommendations.push({
-      priority: 'low',
-      message: `Continue regular engagement with ${donor.name} to maintain the donor relationship.`,
-      action: 'Maintain regular contact',
+      priority: 'medium',
+      category: 'Loyal Supporter',
+      message: `🏆 ${donor.name} is a consistent supporter (${donationCount} gifts, avg $${Math.round(avgDonation)}). Perfect candidate for monthly sustainer program. Monthly donors give 42% more annually!`,
+      action: 'Propose Monthly Giving',
+      howTo: 'Create a task to send monthly giving proposal. Use Campaigns page to show them their total impact.',
     });
   }
 
-  return recommendations;
+  // Check for campaign affinity
+  if (donationCount >= 2) {
+    const campaigns = donor.donations.map(d => d.campaign?.name).filter(Boolean);
+    const uniqueCampaigns = new Set(campaigns);
+    if (campaigns.length > 0 && uniqueCampaigns.size === 1) {
+      recommendations.push({
+        priority: 'medium',
+        category: 'Campaign Affinity',
+        message: `🎯 ${donor.name} only gives to "${campaigns[0]}" campaigns. They have a clear passion area! Target similar campaigns for higher conversion.`,
+        action: 'Campaign-Specific Outreach',
+        howTo: 'When launching similar campaigns, prioritize them in your outreach. Track campaign preferences in task notes.',
+      });
+    }
+  }
+
+  // Seasonal giving pattern
+  if (donationCount >= 2) {
+    const months = donor.donations.map(d => new Date(d.date).getMonth());
+    const decemberGifts = months.filter(m => m === 11).length;
+    if (decemberGifts >= donationCount * 0.5) {
+      recommendations.push({
+        priority: 'low',
+        category: 'Giving Pattern',
+        message: `🎄 ${donor.name} is a year-end giver (${decemberGifts}/${donationCount} gifts in December). Plan special year-end appeal for them in Q4.`,
+        action: 'Year-End Campaign Targeting',
+        howTo: 'Create a task in October to send them early year-end campaign preview and tax benefit info.',
+      });
+    }
+  }
+
+  // Default positive engagement
+  if (recommendations.length === 0 && donationCount > 0 && lastDonationDaysAgo && lastDonationDaysAgo <= 90) {
+    recommendations.push({
+      priority: 'low',
+      category: 'Regular Engagement',
+      message: `✅ ${donor.name} is actively engaged. Continue regular updates and impact stories to maintain this healthy relationship.`,
+      action: 'Maintain Regular Contact',
+      howTo: 'Send quarterly impact updates. Use the Campaigns page to track their interests and tailor communications.',
+    });
+  }
+
+  // If truly no donations yet
+  if (donationCount === 0) {
+    recommendations.push({
+      priority: 'medium',
+      category: 'Prospect Cultivation',
+      message: `🌱 ${donor.name} is a prospect with no donations yet. Nurture the relationship with mission stories and low-barrier engagement opportunities.`,
+      action: 'Prospect Cultivation Strategy',
+      howTo: 'Create a task to invite them to a tour or volunteer opportunity. Use Donations page to record their first gift when it comes.',
+    });
+  }
+
+  return [...recommendations, ...systemTips];
 }
