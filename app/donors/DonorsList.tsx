@@ -174,20 +174,22 @@ export default function DonorsList({ initialDonors }: DonorsListProps) {
                     </div>
                   </td>
                   <td>
-                    {donor.lastGift ? (
-                      <>
-                        <p className={styles.amount}>
-                          ${donor.donations
-                            .find(
-                              (d: any) =>
-                                new Date(d.date).getTime() === donor.lastGift
-                            )
-                            ?.amount.toLocaleString()}
-                        </p>
-                        <p className={styles.date}>
-                          {new Date(donor.lastGift).toISOString().split('T')[0]}
-                        </p>
-                      </>
+                    {donor.donations.length > 0 ? (
+                      (() => {
+                        const lastDonation = donor.donations.reduce((latest: any, current: any) => {
+                          return new Date(current.date) > new Date(latest.date) ? current : latest;
+                        });
+                        return (
+                          <>
+                            <p className={styles.amount}>
+                              ${lastDonation.amount.toLocaleString()}
+                            </p>
+                            <p className={styles.date}>
+                              {new Date(lastDonation.date).toISOString().split('T')[0]}
+                            </p>
+                          </>
+                        );
+                      })()
                     ) : (
                       <p className={styles.noData}>No donations</p>
                     )}
