@@ -44,7 +44,7 @@ export default function CampaignDetailsClient({ campaign: initialCampaign }: Cam
   const [adjustAmount, setAdjustAmount] = useState('');
 
   const progress = Math.round((campaign.raised / campaign.goal) * 100);
-  const donorCount = new Set(campaign.donations.map((d) => d.donorId)).size;
+  const donorCount = new Set(campaign.donations.map((d) => d.donor.id)).size;
   const avgDonation = campaign.donations.length > 0 
     ? campaign.raised / campaign.donations.length 
     : 0;
