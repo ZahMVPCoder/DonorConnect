@@ -146,7 +146,7 @@ export default function AddDonorModal({ isOpen, onClose, onSuccess }: AddDonorMo
             >
               <option value="Active">Active</option>
               <option value="Lapsed">Lapsed</option>
-              <option value="Prospect">Prospect</option>
+              <option value="Losing">Losing</option>
             </select>
           </div>
 

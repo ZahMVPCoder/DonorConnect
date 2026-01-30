@@ -97,10 +97,16 @@ function generateDonorInsights(donor: DonorWithDetails) {
     : null;
 
   // Determine donor segment
-  let segment = 'Prospect';
-  if (donationCount >= 5 && totalDonations >= 1000) segment = 'Major Donor';
-  else if (donationCount >= 3 && totalDonations >= 500) segment = 'Regular Donor';
-  else if (donationCount >= 1) segment = 'Recent Donor';
+  let segment = 'Losing';
+  if (lastDonationDaysAgo !== null && lastDonationDaysAgo > 150) {
+    segment = 'Losing';
+  } else if (donationCount >= 5 && totalDonations >= 1000) {
+    segment = 'Major Donor';
+  } else if (donationCount >= 3 && totalDonations >= 500) {
+    segment = 'Regular Donor';
+  } else if (donationCount >= 1) {
+    segment = 'Recent Donor';
+  }
 
   // Generate recommendations
   const recommendations = generateRecommendations(donor, lastDonationDaysAgo);
@@ -191,7 +197,7 @@ function generateRecommendations(donor: DonorWithDetails, lastDonationDaysAgo: n
   } else if (donationCount >= 3 && totalDonations >= 500) {
     recommendations.push({
       priority: 'medium',
-      category: 'Major Donor Prospect',
+      category: 'Major Donor Potential',
       message: `🎯 ${donor.name} shows major donor potential ($${totalDonations.toLocaleString()} total, ${donationCount} gifts). Consider inviting them to an exclusive donor appreciation event or proposing a naming opportunity.`,
       action: 'Upgrade Cultivation Strategy',
       howTo: 'Add a task to send a personal invitation to your next donor event. Track their response in the task notes.',
@@ -289,9 +295,9 @@ function generateRecommendations(donor: DonorWithDetails, lastDonationDaysAgo: n
   if (donationCount === 0) {
     recommendations.push({
       priority: 'medium',
-      category: 'Prospect Cultivation',
-      message: `🌱 ${donor.name} is a prospect with no donations yet. Nurture the relationship with mission stories and low-barrier engagement opportunities.`,
-      action: 'Prospect Cultivation Strategy',
+      category: 'Losing Donor Outreach',
+      message: `🌱 ${donor.name} hasn’t donated yet or has been inactive for over 5 months. Nurture the relationship with mission stories and low-barrier engagement opportunities.`,
+      action: 'Losing Donor Re-engagement',
       howTo: 'Create a task to invite them to a tour or volunteer opportunity. Use Donations page to record their first gift when it comes.',
     });
   }

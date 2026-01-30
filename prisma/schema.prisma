@@ -27,7 +27,7 @@ model Donor {
   id        String   @id @default(cuid())
   name      String
   email     String   @unique
-  status    String   @default("Active") // Active, Lapsed, Prospect
+  status    String   @default("Active") // Active, Lapsed, Losing
   userId    String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

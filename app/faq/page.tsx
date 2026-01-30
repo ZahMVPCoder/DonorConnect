@@ -40,8 +40,8 @@ export default function FaqPage() {
         <div className={styles.card}>
           <h3>What do the donor status badges mean?</h3>
           <p>
-            Active = engaged recently, Lapsed = no recent activity, Prospect =
-            new or not yet converted.
+            Active = engaged recently, Lapsed = long-term inactive, Losing = no
+            donation in 5+ months.
           </p>
         </div>
 

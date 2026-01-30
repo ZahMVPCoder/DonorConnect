@@ -241,7 +241,7 @@ export default function WhyDonoPage() {
             <div className={styles.tableItem}>
               <h4>Donors Table</h4>
               <p><strong>Purpose:</strong> Core entity storing donor information</p>
-              <p><strong>Fields:</strong> id, name, email, status (Active/Lapsed/Prospect), createdAt, updatedAt</p>
+              <p><strong>Fields:</strong> id, name, email, status (Active/Lapsed/Losing), createdAt, updatedAt</p>
               <p><strong>Why:</strong> Central hub for all donor data; status enables AI segmentation</p>
             </div>
 
@@ -288,7 +288,7 @@ export default function WhyDonoPage() {
               <div>1. Staff clicks "View Insights" on donor profile</div>
               <div>2. API fetches donor's donation history</div>
               <div>3. AI algorithm analyzes: frequency, recency, amount, trends</div>
-              <div>4. Segmentation logic assigns status: Prospect / Recent Donor / Regular Donor / Major Donor</div>
+              <div>4. Segmentation logic assigns status: Losing / Recent Donor / Regular Donor / Major Donor</div>
               <div>5. Recommendation engine suggests next action based on segment</div>
               <div>6. Insights page displays metrics, recommendations, and donation history</div>
             </div>

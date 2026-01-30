@@ -23,7 +23,7 @@
 - ✅ **View All Donors** - Browse complete donor database with search/filter
 - ✅ **Donor Details** - Individual donor profile pages with full history
 - ✅ **Donor Search** - Search donors by name or email
-- ✅ **Donor Status Tracking** - Active, Lapsed, or Prospect status indicators
+- ✅ **Donor Status Tracking** - Active, Lapsed, or Losing status indicators
 - ✅ **Add Donors Modal** - Quick-add interface with form validation
 
 ### Donor Analytics
@@ -110,7 +110,7 @@
 
 ### Donor Intelligence
 - ✅ **AI Donor Analysis** - Intelligent evaluation of donor giving patterns
-- ✅ **Donor Segmentation** - Auto-classify as Major Donor, Regular, Lapsed, Prospect, etc.
+- ✅ **Donor Segmentation** - Auto-classify as Major Donor, Regular, Lapsed, Losing, etc.
 - ✅ **Risk Assessment** - Calculate donor lapse risk based on giving history
 - ✅ **Personalized Recommendations** - AI-generated next-best actions for each donor
 - ✅ **Engagement Strategies** - Custom suggestions based on donor behavior

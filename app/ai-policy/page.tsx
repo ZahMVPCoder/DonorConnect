@@ -25,7 +25,7 @@ export default function AIPolicyPage() {
           <div className={styles.featureBox}>
             <h3>Feature Capabilities</h3>
             <ul>
-              <li><strong>Donor Segmentation:</strong> Automatically classifies donors into meaningful segments (Prospect, Recent Donor, Regular Donor, Major Donor)</li>
+              <li><strong>Donor Segmentation:</strong> Automatically classifies donors into meaningful segments (Losing, Recent Donor, Regular Donor, Major Donor)</li>
               <li><strong>Giving Pattern Analysis:</strong> Analyzes donation frequency, recency, and amounts to identify trends</li>
               <li><strong>Risk Assessment:</strong> Identifies lapsed donors and those at risk of becoming inactive</li>
               <li><strong>Personalized Recommendations:</strong> Suggests specific next actions for each donor (re-engagement calls, upgrade asks, thank you events, etc.)</li>
@@ -123,7 +123,7 @@ export default function AIPolicyPage() {
                     <li><strong>Major Donor:</strong> Lifetime giving &gt; $5,000 AND recent activity</li>
                     <li><strong>Regular Donor:</strong> Multiple donations with consistent giving</li>
                     <li><strong>Recent Donor:</strong> Donated in last 90 days</li>
-                    <li><strong>Prospect:</strong> Never donated or only one small gift</li>
+                    <li><strong>Losing:</strong> No donation in 5+ months</li>
                   </ul>
                 </p>
               </div>
@@ -166,7 +166,7 @@ const daysSinceLastGift =
   (Date.now() - new Date(lastDonationDate).getTime()) / (1000 * 60 * 60 * 24);
 
 // Determine segment
-let segment = 'Prospect';
+let segment = 'Losing';
 if (lifetimeGiving > 5000 && daysSinceLastGift < 365) {
   segment = 'Major Donor';
 } else if (donationCount > 2 && daysSinceLastGift < 180) {

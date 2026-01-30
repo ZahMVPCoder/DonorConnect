@@ -40,12 +40,21 @@ export default function DonorProfileClient({ donor }: DonorProfileClientProps) {
   const totalGiving = donor.donations.reduce((sum, d) => sum + d.amount, 0);
   const donationCount = donor.donations.length;
   const lastDonationDate = donor.donations.length > 0 ? new Date(donor.donations[0].date) : null;
+  const losingThresholdDays = 150;
+  const daysSinceLastDonation = lastDonationDate
+    ? Math.floor((Date.now() - lastDonationDate.getTime()) / (1000 * 60 * 60 * 24))
+    : null;
+  const derivedStatus = daysSinceLastDonation !== null && daysSinceLastDonation > losingThresholdDays
+    ? 'Losing'
+    : donor.status === 'Prospect'
+      ? 'Losing'
+      : donor.status;
 
   const getStatusColor = (status: string) => {
     const colorMap: { [key: string]: string } = {
       'Active': '#4caf50',
       'Lapsed': '#ff9800',
-      'Prospect': '#2196f3',
+      'Losing': '#f59e0b',
     };
     return colorMap[status] || '#999';
   };
@@ -76,9 +85,9 @@ export default function DonorProfileClient({ donor }: DonorProfileClientProps) {
             <p className={styles.email}>{donor.email}</p>
             <span
               className={styles.status}
-              style={{ backgroundColor: getStatusColor(donor.status) }}
+              style={{ backgroundColor: getStatusColor(derivedStatus) }}
             >
-              {donor.status}
+              {derivedStatus}
             </span>
             <div className={styles.metaBadges}>
               <span className={styles.metaBadge}>Last contacted: —</span>

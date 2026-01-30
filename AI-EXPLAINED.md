@@ -44,9 +44,9 @@ The AI categorizes donors based on giving patterns:
 - ✅ 1+ donations
 - Example: Emma (1 gift, $100) → Recent Donor
 
-**Prospect**
-- ⚠️ 0 donations
-- Example: David (no gifts yet) → Prospect
+**Losing**
+- ⚠️ No donation in 5+ months (or no donations yet)
+- Example: David (no gifts yet) → Losing
 
 ---
 

@@ -25,14 +25,27 @@ export default function DonorsClient({ initialDonors }: DonorsClientProps) {
   const [searchTerm, setSearchTerm] = useState('');
   const [filterStatus, setFilterStatus] = useState('All Status');
   const [deletingId, setDeletingId] = useState<string | null>(null);
+  const losingThresholdDays = 150;
 
   const getStatusColor = (status: string) => {
     const statusMap: { [key: string]: string } = {
       'Active': '#4caf50',
       'Lapsed': '#ff9800',
       'Major': '#2196f3',
+      'Losing': '#f59e0b',
     };
     return statusMap[status] || '#999';
+  };
+
+  const getDerivedStatus = (donor: Donor) => {
+    if (donor.lastGift) {
+      const daysSinceLastGift = Math.floor(
+        (Date.now() - donor.lastGift) / (1000 * 60 * 60 * 24)
+      );
+      if (daysSinceLastGift > losingThresholdDays) return 'Losing';
+    }
+    if (donor.status === 'Prospect') return 'Losing';
+    return donor.status;
   };
 
   const handleDeleteDonor = async (donorId: string, donorName: string) => {
@@ -66,7 +79,7 @@ export default function DonorsClient({ initialDonors }: DonorsClientProps) {
       donor.email.toLowerCase().includes(searchTerm.toLowerCase());
 
     const matchesStatus =
-      filterStatus === 'All Status' || donor.status === filterStatus;
+      filterStatus === 'All Status' || getDerivedStatus(donor) === filterStatus;
 
     return matchesSearch && matchesStatus;
   });
@@ -128,7 +141,7 @@ export default function DonorsClient({ initialDonors }: DonorsClientProps) {
           <option>All Status</option>
           <option>Active</option>
           <option>Lapsed</option>
-          <option>Prospect</option>
+          <option>Losing</option>
         </select>
       </div>
 
@@ -145,7 +158,9 @@ export default function DonorsClient({ initialDonors }: DonorsClientProps) {
           </thead>
           <tbody>
             {filteredDonors.length > 0 ? (
-              filteredDonors.map((donor) => (
+              filteredDonors.map((donor) => {
+                const derivedStatus = getDerivedStatus(donor);
+                return (
                 <tr key={donor.id}>
                   <td>
                     <div className={styles.donorCell}>
@@ -183,9 +198,9 @@ export default function DonorsClient({ initialDonors }: DonorsClientProps) {
                   <td>
                     <span
                       className={styles.statusBadge}
-                      style={{ color: getStatusColor(donor.status) }}
+                      style={{ color: getStatusColor(derivedStatus) }}
                     >
-                      {donor.status}
+                      {derivedStatus}
                     </span>
                   </td>
                   <td>
@@ -207,7 +222,8 @@ export default function DonorsClient({ initialDonors }: DonorsClientProps) {
                     </div>
                   </td>
                 </tr>
-              ))
+                );
+              })
             ) : (
               <tr>
                 <td colSpan={5} className={styles.noResults}>

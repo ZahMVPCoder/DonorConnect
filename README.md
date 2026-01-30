@@ -83,7 +83,7 @@ This project meets all teacher requirements:
 ### AI-Powered Insights
 - **Donor Analysis** - Intelligent analysis of donor giving patterns
 - **Smart Recommendations** - AI-generated personalized follow-up recommendations
-- **Donor Segmentation** - Automatic classification (Major Donor, Regular Donor, Prospect, etc.)
+- **Donor Segmentation** - Automatic classification (Major Donor, Regular Donor, Losing, etc.)
 - **Actionable Insights** - Priority-ranked recommendations for engagement strategies
 
 ### Modern UI/UX
@@ -192,7 +192,7 @@ This project meets all teacher requirements:
 - `id`: Unique identifier (UUID)
 - `name`: Donor name (indexed)
 - `email`: Donor email (unique, indexed)
-- `status`: 'Active', 'Lapsed', or 'Prospect'
+- `status`: 'Active', 'Lapsed', or 'Losing'
 - `createdAt`: Record creation timestamp
 - `updatedAt`: Last update timestamp
 - Relations: Many donations, many tasks
@@ -262,7 +262,7 @@ The app includes an intelligent donor analysis engine that powers the Insights f
 - Engagement metrics
 
 **Automatic Donor Segmentation:**
-- **Prospect**: No donations yet, needs initial outreach
+- **Losing**: No donation in 5+ months, needs re-engagement
 - **Recent Donor**: 1-2 donations, high potential for cultivation
 - **Regular Donor**: 3+ donations, consistent supporter
 - **Major Donor**: 5+ donations AND $1000+ lifetime giving
