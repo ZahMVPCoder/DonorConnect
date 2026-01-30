@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import styles from './page.module.css';
+import AddCampaignModal from '@/components/AddCampaignModal';
 
 interface Campaign {
   id: string;
@@ -23,6 +24,7 @@ export default function CampaignsClient({ initialCampaigns }: CampaignsClientPro
   const [campaigns, setCampaigns] = useState(initialCampaigns);
   const [showSuccessToast, setShowSuccessToast] = useState(false);
   const [successMessage, setSuccessMessage] = useState('');
+  const [showAddModal, setShowAddModal] = useState(false);
   const [showAdjustModal, setShowAdjustModal] = useState(false);
   const [selectedCampaign, setSelectedCampaign] = useState<Campaign | null>(null);
   const [adjustAmount, setAdjustAmount] = useState('');
@@ -44,6 +46,11 @@ export default function CampaignsClient({ initialCampaigns }: CampaignsClientPro
     setSuccessMessage(message);
     setShowSuccessToast(true);
     setTimeout(() => setShowSuccessToast(false), 4000);
+  };
+
+  const handleAddCampaignSuccess = (campaign: Campaign) => {
+    setCampaigns((prev) => [campaign, ...prev]);
+    showToast(`✓ Campaign "${campaign.name}" has been created!`);
   };
 
   const handleMarkComplete = async (campaignId: string) => {
@@ -189,8 +196,21 @@ export default function CampaignsClient({ initialCampaigns }: CampaignsClientPro
         </div>
       )}
 
-      <h1 className={styles.title}>Campaigns</h1>
-      <p className={styles.subtitle}>Track fundraising campaigns and goal progress</p>
+      <div className={styles.headerRow}>
+        <div>
+          <h1 className={styles.title}>Campaigns</h1>
+          <p className={styles.subtitle}>Track fundraising campaigns and goal progress</p>
+        </div>
+        <button className={styles.addButton} onClick={() => setShowAddModal(true)}>
+          + Add Campaign
+        </button>
+      </div>
+
+      <AddCampaignModal
+        isOpen={showAddModal}
+        onClose={() => setShowAddModal(false)}
+        onSuccess={handleAddCampaignSuccess}
+      />
 
       {/* Campaign Cards */}
       <div className={styles.campaignsGrid}>
