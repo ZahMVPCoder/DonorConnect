@@ -65,6 +65,17 @@ export default function ReportsPage() {
               <div className={styles.donutLabel}>Retained</div>
             </div>
           </div>
+          <div className={styles.tipBox}>
+            <div className={styles.tipHeader}>
+              <span className={styles.aiBadge}>🤖 AI Insight</span>
+              <span className={styles.tipLabel}>Based on current stats</span>
+            </div>
+            <p>
+              Retention is 68%. If it drops below 60%, take action. Average
+              customer retention rates across industries typically range from
+              70% to 80%.
+            </p>
+          </div>
         </div>
 
         <div className={styles.card}>
