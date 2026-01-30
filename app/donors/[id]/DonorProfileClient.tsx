@@ -80,6 +80,10 @@ export default function DonorProfileClient({ donor }: DonorProfileClientProps) {
             >
               {donor.status}
             </span>
+            <div className={styles.metaBadges}>
+              <span className={styles.metaBadge}>Last contacted: —</span>
+              <span className={styles.metaBadge}>Next follow-up: —</span>
+            </div>
           </div>
         </div>
         <div className={styles.headerActions}>

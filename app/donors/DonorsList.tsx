@@ -170,6 +170,10 @@ export default function DonorsList({ initialDonors }: DonorsListProps) {
                       <div>
                         <p className={styles.donorName}>{donor.name}</p>
                         <p className={styles.email}>{donor.email}</p>
+                        <div className={styles.badgeRow}>
+                          <span className={styles.metaBadge}>Last contacted: —</span>
+                          <span className={styles.metaBadge}>Next follow-up: —</span>
+                        </div>
                       </div>
                     </div>
                   </td>

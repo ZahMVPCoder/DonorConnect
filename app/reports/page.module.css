@@ -1,0 +1,157 @@
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px 80px;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.title {
+  font-size: 2.6rem;
+  font-weight: 800;
+  margin-bottom: 10px;
+  background: linear-gradient(135deg, #333 0%, #667eea 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.subtitle {
+  color: #888;
+  font-size: 1.05rem;
+  margin: 0;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 22px;
+}
+
+.card {
+  background: white;
+  border-radius: 16px;
+  padding: 22px;
+  box-shadow: 0 6px 22px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(102, 126, 234, 0.12);
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.cardHeader h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  color: #333;
+}
+
+.badge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #5b6acb;
+  background: rgba(102, 126, 234, 0.12);
+  border: 1px solid rgba(102, 126, 234, 0.2);
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+
+.chartPlaceholder {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+  height: 140px;
+  padding: 14px 10px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #f5f7ff 0%, #f0f4ff 100%);
+  border: 1px dashed rgba(102, 126, 234, 0.25);
+}
+
+.chartBar {
+  flex: 1;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 10px 10px 6px 6px;
+  opacity: 0.9;
+}
+
+.progressList {
+  display: grid;
+  gap: 12px;
+}
+
+.progressItem {
+  display: grid;
+  gap: 6px;
+  font-size: 0.95rem;
+  color: #333;
+}
+
+.progressTrack {
+  width: 100%;
+  height: 10px;
+  border-radius: 999px;
+  background: #eef1ff;
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.donut {
+  width: 160px;
+  height: 160px;
+  margin: 0 auto;
+  border-radius: 50%;
+  background: conic-gradient(#667eea 0deg 245deg, #eef1ff 245deg 360deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.donutInner {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  box-shadow: inset 0 0 0 1px rgba(102, 126, 234, 0.12);
+}
+
+.donutValue {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #333;
+}
+
+.donutLabel {
+  font-size: 0.8rem;
+  color: #888;
+}
+
+.sourceList {
+  display: grid;
+  gap: 10px;
+}
+
+.sourceItem {
+  display: flex;
+  justify-content: space-between;
+  color: #333;
+  font-size: 0.95rem;
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: #fafbff;
+  border: 1px solid rgba(102, 126, 234, 0.12);
+}

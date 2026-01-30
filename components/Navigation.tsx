@@ -53,6 +53,9 @@ export default function Navigation() {
                 <Link href="/">Dashboard</Link>
               </li>
               <li>
+                <Link href="/reports">Reports</Link>
+              </li>
+              <li>
                 <Link href="/donors">Donors</Link>
               </li>
               <li>
@@ -60,6 +63,9 @@ export default function Navigation() {
               </li>
               <li>
                 <Link href="/tasks">Tasks</Link>
+              </li>
+              <li>
+                <Link href="/faq">FAQ</Link>
               </li>
               {userRole === 'admin' && (
                 <li>
@@ -83,6 +89,9 @@ export default function Navigation() {
               </li>
               <li>
                 <Link href="/ai-policy">AI Policy</Link>
+              </li>
+              <li>
+                <Link href="/faq">FAQ</Link>
               </li>
               <li>
                 <Link href="/auth/signin">Sign In</Link>
